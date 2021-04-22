@@ -54,6 +54,8 @@ namespace test.Controllers
                 Session["isRabiesVaccine"] = true;
             }
 
+
+
             DateTime today = DateTime.Now;
             VisitVaccination visitVaccination = new VisitVaccination()
             {
