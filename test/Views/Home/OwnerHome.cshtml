@@ -1,0 +1,33 @@
+﻿@model test.Models.OwnerHome
+
+@{
+	ViewBag.Title = "OwnerHome";
+}
+
+<h2>
+	Welcome
+	@Html.DisplayFor(model => model.strFirstName)
+	@Html.DisplayFor(model => model.strLastName)
+</h2>
+
+<body>
+	<div class="invisible-box" style="width:fit-content">
+		@foreach (var item in Model.PetImageData) {
+			<a style="color:#5cb85c; text-decoration:none; padding-left: 15px" href='@Url.Action("PetProfile", "TPets", new { id = item.intPetID })' ;return false;>
+
+				<div class="home-btn" style="padding-top:10px">
+					<div style="text-align:center; padding-top:5px">
+						@Html.DisplayFor(modelItem => item.strPetName)
+					</div>
+					<div>
+
+						<img src="/TPetImages/getimg?intPetImageID=@item.intPetImageID" class="center" alt="avatar" style=" margin-top:10px; width:80%; max-height:100px; border:solid" />
+
+					</div>
+
+				</div>
+			</a>
+		}
+	</div>
+</body>
+

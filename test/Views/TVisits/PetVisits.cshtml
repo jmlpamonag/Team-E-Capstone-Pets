@@ -100,7 +100,7 @@
                     @Html.DisplayName("Visit Reason")
                 </th>
                 <th>
-                    @Html.DisplayName("View | Edit | Delete")
+                    @Html.DisplayName("View | Edit | Delete | Print Invoice")
                 </th>
             </tr>
 
@@ -113,13 +113,17 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.TVisitReason.strVisitReason)
                     </td>
-                    <td style="white-space:nowrap">
-                        <a style="color:#5cb85c; padding-left: 15px" href='@Url.Action("Details", "TVisits", new { id = item.intVisitID })' ;return false;>  <i class="far fa-eye"></i></a>
-                        <a style="color:#f0ad4e; padding-left: 15px" href='@Url.Action("Edit", "TVisits", new { id = item.intVisitID })' ;return false;>  <i class="fas fa-pencil-alt"></i></a>
-                        <a style="color:red; padding-left: 15px" href='@Url.Action("Delete", "TVisits", new { id = item.intVisitID })' ;return false;>  <i class="fas fa-trash-alt"></i></a>
-                    </td>
+					<td style="white-space:nowrap">
+						<a style="color:#5cb85c; padding-left: 15px" href='@Url.Action("Details", "TVisits", new { id = item.intVisitID })' ;return false;>  <i class="far fa-eye"></i></a>
+						<a style="color:#f0ad4e; padding-left: 15px" href='@Url.Action("Edit", "TVisits", new { id = item.intVisitID })' ;return false;>  <i class="fas fa-pencil-alt"></i></a>
+						<a style="color:red; padding-left: 15px" href='@Url.Action("Delete", "TVisits", new { id = item.intVisitID })' ;return false;>  <i class="fas fa-trash-alt"></i></a>
+						<a style="color:dodgerblue; padding-left: 15px" href='@Url.Action("PrintInvoice", "TVisits", new { id = item.intVisitID })' ;return false;>  <i class="far fa-file-pdf"></i></a>
+						<p>
+					</td>
                 </tr>
             }
+
+
 
         </table>
     </div>

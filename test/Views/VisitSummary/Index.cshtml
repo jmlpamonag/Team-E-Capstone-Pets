@@ -1,237 +1,216 @@
-﻿@model test.Models.VisitSummary
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
+using System.Data.Entity.Core.Objects;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Net;
+using System.Net.Mail;
+using System.Web;
+using System.Web.Mvc;
+using test;
+using SmtpClient = System.Net.Mail.SmtpClient;
 
-@{
-    ViewBag.Title = "Index";
+
+
+
+
+namespace test.Controllers {
+public class TOwnersController : Controller {
+private CapstoneEntities db = new CapstoneEntities();
+
+
+
+
+
+// GET: TOwners
+public ActionResult Index()
+{
+var tOwners = db.TOwners.Include(t => t.TState);
+return View(tOwners.ToList());
 }
-<h2>@ViewBag.Name</h2>
-<style>
-    .topnav {
-        overflow: hidden;
-        background-color: #333;
-        height: 40px;
-        max-width: 95%;
-        margin: auto;
-    }
 
-        .topnav > ul {
-            list-style: none;
-            padding-inline-start: unset;
-        }
 
-            .topnav > ul > li {
-                float: left;
-                color: #9d9d9d;
-                text-align: center;
-                padding: 10px 60px;
-                text-decoration: none;
-                font-size: 15px;
-            }
 
-                .topnav > ul > li > a {
-                    color: whitesmoke;
-                    text-decoration: none;
-                }
 
-        .topnav ul li:hover {
-            background-color: grey;
-            color: black;
-        }
 
-        .topnav ul li.active {
-            background-color: #6495ed;
-            color: white;
-        }
+// GET: TOwners/Details/5
+public ActionResult Details(int? id) {
+if (id == null) {
+return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+}
+TOwner tOwner = db.TOwners.Find(id);
+if (tOwner == null) {
+return HttpNotFound();
+}
+return View(tOwner);
+}
 
-        .flex-row
-        {
-            width: 50%;
-            display: flex;
-            flex-wrap: wrap;
-        }
 
-        .flex-container {
-        display: flex;
-        flex-wrap: wrap;
-        border: ridge;
-        margin: 20px;
-        }
 
-        h4 {
-        margin-left: 250px;
-        text-decoration: none;
-        }
 
-        
-</style>
-<div class="form-horizontal">
-    <div class="topnav">
-        <ul>
-            <li>@Html.ActionLink("Services", "Index", "VisitServices")</li>
-            <li>@Html.ActionLink("Medications", "Index", "VisitMedications")</li>
-            <li>@Html.ActionLink("Team", "Index", "VisitEmployees")</li>
-            <li class="active">@Html.ActionLink("Summary", "Index", "VisitSummary")</li>
-        </ul>
-    </div>
-</div>
-<div class="body-content">
-    <div class="form-horizontal">
-        <div class="flex-container" style="border: none;">
-            <div class="flex-row">
-                <div class="form-group-inline">
-                    @Html.LabelFor(model => model.strOwnerName, "Client", new { htmlAttributes = new { @class = "control-label col-md-2" }, style = "font-size: 16px; font-weight: 700; padding-left:  15px;" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.strOwnerName, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled", @style = "width:300px" } })
-                    </div>
-                </div>
 
-                <div class="form-group-inline">
-                    @Html.LabelFor(model => model.strAddress, "Address", new { htmlAttributes = new { @class = "control-label col-md-2" }, style = "font-size: 16px; font-weight: 700; padding-left:  15px;" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.strAddress, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled", @style = "width:300px" } })
-                    </div>
-                </div>
+// GET: TOwners/Create
+public ActionResult Create() {
+ViewBag.intStateID = new SelectList(db.TStates, "intStateID", "strStateCode");
+ViewBag.intUserID = new SelectList(db.TUsers, "intUserID", "strUserName");
+ViewBag.intGenderID = new SelectList(db.TGenders, "intGenderID", "strGender");
+return View();
+}
 
-                <div class="form-group-inline">
-                    @Html.LabelFor(model => model.strPetName, "Patient", new { htmlAttributes = new { @class = "control-label col-md-2" }, style = "font-size: 16px; font-weight: 700; padding-left:  15px;" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.strPetName, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled", @style = "width:300px" } })
-                    </div>
-                </div>
 
-                <div class="form-group-inline">
-                    @Html.LabelFor(model => model.strPetNumber, "Pet Number", new { htmlAttributes = new { @class = "control-label col-md-2" }, style = "font-size: 16px; font-weight: 700; padding-left:  15px;" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.strPetNumber, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled", @style = "width:300px" } })
-                    </div>
-                </div>
-            </div>
 
-            <div class="flex-row">
-                <div class="form-group-inline">
-                    @Html.LabelFor(model => model.intOwnerNumber, "Client No.", new { htmlAttributes = new { @class = "control-label col-md-2" }, style = "font-size: 16px; font-weight: 700; padding-left:  15px;" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.intOwnerNumber, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled", @style = "width:300px" } })
-                    </div>
-                </div>
 
-                <div class="form-group-inline">
-                    @Html.LabelFor(model => model.strPhoneNumber, "Contact No.", new { htmlAttributes = new { @class = "control-label col-md-2" }, style = "font-size: 16px; font-weight: 700; padding-left:  15px;" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.strPhoneNumber, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled", @style = "width:300px" } })
-                    </div>
-                </div>
 
-                <div class="form-group-inline">
-                    @Html.LabelFor(model => model.dtmOfVisit, "Date of Visit", new { htmlAttributes = new { @class = "control-label col-md-2" }, style = "font-size: 16px; font-weight: 700; padding-left:  15px;" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.dtmOfVisit, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled", @style = "width:300px" } })
-                    </div>
-                </div>
+// POST: TOwners/Create
+// To protect from overposting attacks, enable the specific properties you want to bind to, for
+// more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+[HttpPost]
+[ValidateAntiForgeryToken]
+public ActionResult Create([Bind(Include = "intOwnerID,strFirstName,strLastName,intGenderID,strAddress,strCity,intStateID,strZip,strPhoneNumber,strEmail,strOwner2Name,strOwner2PhoneNumber,strOwner2Email,strNotes")] TOwner tOwner) {
+if (ModelState.IsValid) {
+ObjectParameter strUserName = new ObjectParameter("strUserName", typeof(string));
+ObjectParameter strPassword = new ObjectParameter("strPassword", typeof(string));
 
-                <div class="form-group-inline">
-                    @Html.LabelFor(model => model.strDoctor, "Doctor", new { htmlAttributes = new { @class = "control-label col-md-2" }, style = "font-size: 16px; font-weight: 700; padding-left:  15px;" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.strDoctor, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled", @style = "width:300px" } })
-                    </div>
-                </div>
-            </div>
-        </div>
+var data = db.uspAddUserOwner(strUserName, strPassword, tOwner.strFirstName, tOwner.strLastName, tOwner.intGenderID, tOwner.strAddress, tOwner.strCity, tOwner.intStateID, tOwner.strZip, tOwner.strPhoneNumber,tOwner.strEmail, tOwner.strOwner2Name, tOwner.strOwner2PhoneNumber, tOwner.strOwner2Email, tOwner.strNotes);
 
-        <div class="flex-container" style="border: none; padding: 0px; margin: 0px;">
-            <div style="text-align: center; width: 50%;">
-                <h4 style="margin:auto;">Services</h4>
-            </div>
-            <div style="text-align: center;  width: 50%;">
-                <h4 style="margin:auto;">Medications</h4>
-            </div>
-        </div>
-        
-        <div class="form-horizontal" style="display: flex;"> 
-            <div class="flex-container">                    
-                <table class="table">
-                    <tr>
-                        <th>
-                            @Html.DisplayName("Service")
-                        </th>
-                        <th>
-                            @Html.DisplayName("Price")
-                        </th>
-                    </tr>
 
-                    @foreach (TVisitService service in Model.PetVisitServices)
-                    {
-                        <tr>
-                            <td>
-                                @service.TService.strServiceDesc
-                            </td>
-                            <td>
-                                $ @Math.Round(service.TService.dblPrice, 2)
-                            </td>
-                        </tr>
-                    }
-                    <tr>
-                        <td style="font-weight: 800">
-                            Total
-                        </td>
-                        <td style="font-weight: 800">
-                            @ViewBag.ServicesTotal
-                        </td>
-                    </tr>
 
-                </table>
-            </div>
-            <div class="flex-container">
-                <table class="table">
-                    <tr>
-                        <th>
-                            @Html.DisplayName("Medication")
-                        </th>
-                        <th>
-                            @Html.DisplayName("Quantity")
-                        </th>
-                        <th>
-                            @Html.DisplayName("Price")
-                        </th>
-                    </tr>
 
-                    @foreach (TVisitMedication medication in Model.PetVisitMedications)
-                    {
-                        <tr>
-                            <td>
-                                @medication.TMedication.strMedicationName
-                            </td>
-                            <td>
-                                @medication.intQuantity
-                            </td>
-                            <td>
-                                $ @Math.Round(medication.TMedication.dblPrice * medication.intQuantity, 2)
-                            </td>
-                        </tr>
-                    }
-                    <tr>
-                        <td style="font-weight: 800">
-                            Total
-                        </td>
-                        <td></td>
-                        <td style="font-weight: 800">
-                            @ViewBag.MedicationsTotal
-                        </td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-    </div>
-    <div class="flex-container" style="margin: 0px; border:none; padding: 0px 0px 20px 22px">
-        <div class="col-md-offset-2" style="margin-left:inherit; margin-right:10px">
-            <button class="btn-primary" onclick='window.location.href = "@Url.Action("Index", "VisitEmployees", routeValues: null)"'>
-                Previous
-            </button>
-        </div>
-        <div class="col-md-offset-2" style="margin-left:inherit">
-            <button class="btn-success" onclick="location.href='@Url.Action("PetVisits", "TVisits", new { id = Model.intPetID})'" >
-                Save
-            </button>
-        </div>
-    </div>
-</div>
 
+string UserName = Convert.ToString(strUserName.Value);
+string Password = Convert.ToString(strPassword.Value);
+
+
+
+
+
+string from = "capstonepets2021@gmail.com";
+string to = tOwner.strEmail;
+MailMessage mm = new MailMessage(from, to);
+mm.Subject = "Capstone Pets - Login Credentials";
+mm.Body = "[ Username: " + UserName + " ] [ Password: " + Password + " ]";
+mm.IsBodyHtml = false;
+
+
+
+
+
+SmtpClient smtp = new SmtpClient();
+smtp.Host = "smtp.gmail.com";
+smtp.Port = 587;
+smtp.EnableSsl = true;
+
+
+
+
+
+NetworkCredential nc = new NetworkCredential("capstonepets2021@gmail.com", "capstonepets21");
+smtp.UseDefaultCredentials = true;
+smtp.Credentials = nc;
+smtp.Send(mm);
+
+
+
+
+
+return RedirectToAction("Index");
+}
+
+
+
+
+
+ViewBag.intStateID = new SelectList(db.TStates, "intStateID", "strStateCode", tOwner.intStateID);
+return View(tOwner);
+}
+
+
+
+
+
+// GET: TOwners/Edit/5
+public ActionResult Edit(int? id) {
+if (id == null) {
+return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+}
+TOwner tOwner = db.TOwners.Find(id);
+if (tOwner == null) {
+return HttpNotFound();
+}
+ViewBag.intStateID = new SelectList(db.TStates, "intStateID", "strStateCode", tOwner.intStateID);
+ViewBag.intUserID = new SelectList(db.TUsers, "intUserID", "strUserName", tOwner.intUserID);
+ViewBag.intGenderID = new SelectList(db.TGenders, "intGenderID", "strGender", tOwner.intGenderID);
+return View(tOwner);
+}
+
+
+
+
+
+// POST: TOwners/Edit/5
+// To protect from overposting attacks, enable the specific properties you want to bind to, for
+// more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+[HttpPost]
+[ValidateAntiForgeryToken]
+public ActionResult Edit([Bind(Include = "intOwnerID,strFirstName,strLastName,intGenderID,strAddress,strCity,intStateID,strZip,strPhoneNumber,strEmail,strOwner2Name,strOwner2PhoneNumber,strOwner2Email,strNotes,intUserID")] TOwner tOwner) {
+if (ModelState.IsValid) {
+db.Entry(tOwner).State = EntityState.Modified;
+db.SaveChanges();
+return RedirectToAction("Index");
+}
+ViewBag.intStateID = new SelectList(db.TStates, "intStateID", "strStateCode", tOwner.intStateID);
+ViewBag.intUserID = new SelectList(db.TUsers, "intUserID", "strUserName", tOwner.intUserID);
+ViewBag.intGenderID = new SelectList(db.TGenders, "intGenderID", "strGender", tOwner.intGenderID);
+
+
+
+
+
+
+return View(tOwner);
+}
+
+
+
+
+
+// GET: TOwners/Delete/5
+public ActionResult Delete(int? id) {
+if (id == null) {
+return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+}
+TOwner tOwner = db.TOwners.Find(id);
+if (tOwner == null) {
+return HttpNotFound();
+}
+return View(tOwner);
+}
+
+
+
+
+
+// POST: TOwners/Delete/5
+[HttpPost, ActionName("Delete")]
+[ValidateAntiForgeryToken]
+public ActionResult DeleteConfirmed(int id) {
+TOwner tOwner = db.TOwners.Find(id);
+db.TOwners.Remove(tOwner);
+db.SaveChanges();
+return RedirectToAction("Index");
+}
+
+
+
+
+
+protected override void Dispose(bool disposing) {
+if (disposing) {
+db.Dispose();
+}
+base.Dispose(disposing);
+}
+}
+}

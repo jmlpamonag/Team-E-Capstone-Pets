@@ -1,0 +1,21 @@
+﻿@model test.TRole
+
+<h2> Update User Role </h2>
+
+@using (Html.BeginForm("Update", "TRoles", FormMethod.Post, new { role = "form", id = "updateForm" })) {
+	@Html.ValidationSummary(true)
+	@Html.AntiForgeryToken()
+
+	<div class="form-group">
+		@Html.HiddenFor(model => model.intRoleID)
+		@Html.LabelFor(model => model.strRoleName, "User Role:")
+		@Html.TextBoxFor(model => model.strRoleName, new { @class = "form-control" })
+	</div>
+
+
+	<button type="submit" class="btn-primary">Update</button>
+
+	@Html.ActionLink("Back To List", "Index", null, new { @style = "margin-left:50px; font-weight:bold;" })
+	<div id="msg"></div>
+}
+

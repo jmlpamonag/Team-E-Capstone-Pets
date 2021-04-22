@@ -3,155 +3,169 @@
 @{
 	ViewBag.Title = "Delete";
 }
-
-<h2>Delete</h2>
-<p style="margin-left: 25px; font-size:15px">
-
-	<button class="btn-primary" onclick="location.href='@Url.Action("Index", "TOwners")';return false;"><i class="fas fa-arrow-left"></i> Back To List</button>
-	@*@Html.ActionLink("Back to List", "Index")*@
-</p>
-
-<div class="body-content">
+@if (Model.TPets.Count > 0) {
+<div class="body-content" >
 
 	<div class="form-horizontal" style="padding-bottom:50px">
-		<div>
-			<h3>Are you sure you want to delete this client?</h3>
-			<hr style="margin:5px; margin-bottom: 15px" />
-
-
-			<dl style="" class="dl-horizontal">
-				<dt style="white-space:nowrap">
-					@Html.DisplayName("First Name")
-				</dt>
-
-				<dd style="white-space:nowrap">
-					@Html.DisplayFor(model => model.strFirstName)
-				</dd>
-
-				<dt>
-					@Html.DisplayName("Last Name")
-				</dt>
-
-				<dd>
-					@Html.DisplayFor(model => model.strLastName)
-				</dd>
-
-				<dt>
-					@Html.DisplayName("Gender")
-				</dt>
-
-				<dd>
-					@Html.DisplayFor(model => model.TGender.strGender)
-				</dd>
-
-				<dt>
-					@Html.DisplayName("Address")
-				</dt>
-
-				<dd>
-					@Html.DisplayFor(model => model.strAddress)
-				</dd>
-
-				<dt>
-					@Html.DisplayName("City")
-				</dt>
-
-				<dd>
-					@Html.DisplayFor(model => model.strCity)
-				</dd>
-
-				<dt>
-					@Html.DisplayName("State")
-				</dt>
-
-				<dd>
-					@Html.DisplayFor(model => model.TState.strStateCode)
-				</dd>
-
-				<dt>
-					@Html.DisplayName("Zip")
-				</dt>
-
-				<dd>
-					@Html.DisplayFor(model => model.strZip)
-				</dd>
-
-				<dt>
-					@Html.DisplayName("Phone #")
-				</dt>
-
-				<dd>
-					@Html.DisplayFor(model => model.strPhoneNumber)
-				</dd>
-
-				<dt>
-					@Html.DisplayName("Email")
-				</dt>
-
-				<dd>
-					@Html.DisplayFor(model => model.strEmail)
-				</dd>
-
-				<dt>
-					@Html.DisplayName("Owner 2 Name")
-				</dt>
-
-				<dd>
-					@Html.DisplayFor(model => model.strOwner2Name)
-				</dd>
-
-				<dt>
-					@Html.DisplayName("Owner 2 Phone #")
-				</dt>
-
-				<dd>
-					@Html.DisplayFor(model => model.strOwner2PhoneNumber)
-				</dd>
-
-				<dt>
-					@Html.DisplayName("Owner 2 Email")
-				</dt>
-
-				<dd>
-					@Html.DisplayFor(model => model.strOwner2Email)
-				</dd>
-
-				<dt>
-					@Html.DisplayName("Notes")
-				</dt>
-
-				<dd>
-					@Html.DisplayFor(model => model.strNotes)
-				</dd>
-
-				<dt>
-					@Html.DisplayName("Username")
-				</dt>
-
-				<dd>
-					@Html.DisplayFor(model => model.TUser.strUserName)
-				</dd>
-
-
-
-			</dl>
-
-			@using (Html.BeginForm()) {
-				@Html.AntiForgeryToken()
-
-				<div class="form-actions no-color">
-					<input type="submit" value="Delete" class="btn-danger" />
-					<button class="btn-warning" onclick="location.href='@Url.Action("Index", "TOwners")';return false;">
-						<i class="fas fa-times"></i>  Cancel
-					</button>
-				</div>
-			}
-
+		<div class="center" style="text-align:center">
+			<h3>Cannot Delete!</h3>
+			<p style="margin-left: 25px; font-size:15px">
+				You cannot delete this owner because there are pets assigned to them.
+			</p>
+			<div >
+				<button class="btn-primary" onclick="location.href='@Url.Action("Index", "TOwners")';return false;"><i class="fas fa-arrow-left"></i> Back To List</button>
+			</div>
 		</div>
 	</div>
+</div>	}
+else {
+			<h2>Delete</h2>
+			<p style="margin-left: 25px; font-size:15px">
+
+				<button class="btn-primary" onclick="location.href='@Url.Action("Index", "TOwners")';return false;"><i class="fas fa-arrow-left"></i> Back To List</button>
+				@*@Html.ActionLink("Back to List", "Index")*@
+			</p>
+
+			<div class="body-content">
+
+				<div class="form-horizontal" style="padding-bottom:50px">
+					<div>
+						<h3>Are you sure you want to delete this client?</h3>
+						<hr style="margin:5px; margin-bottom: 15px" />
 
 
-</div>
+						<dl style="" class="dl-horizontal">
+							<dt style="white-space:nowrap">
+								@Html.DisplayName("First Name")
+							</dt>
 
+							<dd style="white-space:nowrap">
+								@Html.DisplayFor(model => model.strFirstName)
+							</dd>
+
+							<dt>
+								@Html.DisplayName("Last Name")
+							</dt>
+
+							<dd>
+								@Html.DisplayFor(model => model.strLastName)
+							</dd>
+
+							<dt>
+								@Html.DisplayName("Gender")
+							</dt>
+
+							<dd>
+								@Html.DisplayFor(model => model.TGender.strGender)
+							</dd>
+
+							<dt>
+								@Html.DisplayName("Address")
+							</dt>
+
+							<dd>
+								@Html.DisplayFor(model => model.strAddress)
+							</dd>
+
+							<dt>
+								@Html.DisplayName("City")
+							</dt>
+
+							<dd>
+								@Html.DisplayFor(model => model.strCity)
+							</dd>
+
+							<dt>
+								@Html.DisplayName("State")
+							</dt>
+
+							<dd>
+								@Html.DisplayFor(model => model.TState.strStateCode)
+							</dd>
+
+							<dt>
+								@Html.DisplayName("Zip")
+							</dt>
+
+							<dd>
+								@Html.DisplayFor(model => model.strZip)
+							</dd>
+
+							<dt>
+								@Html.DisplayName("Phone #")
+							</dt>
+
+							<dd>
+								@Html.DisplayFor(model => model.strPhoneNumber)
+							</dd>
+
+							<dt>
+								@Html.DisplayName("Email")
+							</dt>
+
+							<dd>
+								@Html.DisplayFor(model => model.strEmail)
+							</dd>
+
+							<dt>
+								@Html.DisplayName("Owner 2 Name")
+							</dt>
+
+							<dd>
+								@Html.DisplayFor(model => model.strOwner2Name)
+							</dd>
+
+							<dt>
+								@Html.DisplayName("Owner 2 Phone #")
+							</dt>
+
+							<dd>
+								@Html.DisplayFor(model => model.strOwner2PhoneNumber)
+							</dd>
+
+							<dt>
+								@Html.DisplayName("Owner 2 Email")
+							</dt>
+
+							<dd>
+								@Html.DisplayFor(model => model.strOwner2Email)
+							</dd>
+
+							<dt>
+								@Html.DisplayName("Notes")
+							</dt>
+
+							<dd>
+								@Html.DisplayFor(model => model.strNotes)
+							</dd>
+
+							<dt>
+								@Html.DisplayName("Username")
+							</dt>
+
+							<dd>
+								@Html.DisplayFor(model => model.TUser.strUserName)
+							</dd>
+
+
+
+						</dl>
+
+						@using (Html.BeginForm()) {
+		@Html.AntiForgeryToken()
+
+							<div class="form-actions no-color">
+								<input type="submit" value="Delete" class="btn-danger" />
+								<button class="btn-warning" onclick="location.href='@Url.Action("Index", "TOwners")';return false;">
+									<i class="fas fa-times"></i>  Cancel
+								</button>
+							</div>}
+
+					</div>
+				</div>
+
+
+			</div>
+}
 
 

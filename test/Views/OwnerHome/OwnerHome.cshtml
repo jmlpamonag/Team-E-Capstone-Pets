@@ -1,0 +1,47 @@
+﻿@model test.TOwner
+@*@model IEnumerable<test.TPetImage>*@
+
+@{
+	ViewBag.Title = "OwnerHome";
+}
+
+<!DOCTYPE html>
+<h2>
+	Welcome
+	@*@Html.DisplayFor(model => model.TOwner.strFirstName)
+		@Html.DisplayFor(model => model.TOwner.strLastName)*@
+</h2>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width" />
+	<title>PetOwnerHome</title>
+</head>
+<body>
+	<div class="invisible-box">
+		@foreach (var item in Model.TPets) {
+			<a style="color:#5cb85c; text-decoration:none; padding-left: 15px" href='@Url.Action("PetProfile", "TPets", new { id = item.intPetID })' ;return false;>
+
+				<div class="home-btn">
+					<div style="text-align:center; padding-top:5px">
+						@Html.DisplayFor(modelItem => item.strPetName)
+					</div>
+					<div>
+						
+					@*<img src="/TPetImages/getimg?intPetImageID=@Model.intPetImageID" alt="avatar" style="max-height:200px; max-width:200px" />*@
+
+					@*<img src="/TPetImages/getimg?intPetImageID=@item.TPetImage.intPetImageID" alt="image" class="centerimg" />*@
+
+					@*<img src="/TPetImages/getimg?intPetImageID=@item.TPetImage.intPetImageID" alt="image" class="centerimg" />*@
+					</div >
+					@*<div>
+		<img src="/TPetImages/getimg?intPetImageID=@item.TPetImage.intPetImageID" alt="image" class="centerimg" />
+	</div>*@
+
+					</div>
+			</a>
+		}
+	</div>
+
+
+</body>
+</html>

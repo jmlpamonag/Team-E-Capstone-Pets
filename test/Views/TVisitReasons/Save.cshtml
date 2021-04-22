@@ -1,0 +1,24 @@
+﻿@model test.TVisitReason
+
+<h2> New Visit Reason </h2>
+
+
+@using (Html.BeginForm("Save", "TVisitReasons", FormMethod.Post, new { role = "form", id = "saveForm" })) {
+
+
+	@Html.ValidationSummary(true)
+	@Html.AntiForgeryToken()
+
+	<div class="form-group">
+		@Html.HiddenFor(model => model.intVisitReasonID)
+		@Html.LabelFor(model => model.strVisitReason, "Visit Reason:")
+		@Html.TextBoxFor(model => model.strVisitReason, new { @class = "form-control" })
+	</div>
+
+	<button type="submit" class="btn-primary">Save</button>
+
+	@Html.ActionLink("Back To List", "Index", null, new { @style = "margin-left:50px; font-weight:bold;" })
+	<div id="msg"></div>
+}
+
+

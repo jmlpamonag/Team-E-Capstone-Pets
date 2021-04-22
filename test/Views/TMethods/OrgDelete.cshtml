@@ -1,0 +1,35 @@
+﻿@model test.TMethod
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete A Method</h2>
+
+<div class="body-content">
+	<h4>Medication Method Type</h4>
+	<hr />
+
+	<h3>Are you sure you want to delete this?</h3>
+
+
+	<dl class="dl-horizontal">
+		<dt>
+			Method Form
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.strMethod)
+		</dd>
+
+	</dl>
+
+	@using (Html.BeginForm()) {
+		@Html.AntiForgeryToken()
+
+		<div class="form-actions no-color">
+			<input type="submit" value="Delete" class="btn btn-default" /> |
+			@Html.ActionLink("Back to List", "Index")
+		</div>
+	}
+</div>

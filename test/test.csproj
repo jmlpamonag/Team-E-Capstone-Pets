@@ -45,6 +45,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.6.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
+      <HintPath>..\packages\BouncyCastle.1.8.6.1\lib\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -52,9 +55,15 @@
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Rotativa, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Rotativa.1.7.3\lib\net461\Rotativa.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.7\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
@@ -63,6 +72,12 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Http, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.7\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.7\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -152,11 +167,14 @@
     <Compile Include="Controllers\TMedicationsController.cs" />
     <Compile Include="Controllers\TMethodsController.cs" />
     <Compile Include="Controllers\TOwnersController.cs" />
+    <Compile Include="Controllers\TPetImagesController.cs" />
     <Compile Include="Controllers\TPetsController.cs" />
     <Compile Include="Controllers\TPetTypesController.cs" />
     <Compile Include="Controllers\TRolesController.cs" />
     <Compile Include="Controllers\TServicesController.cs" />
-    <Compile Include="Controllers\TServiceTypesController.cs" />
+    <Compile Include="Controllers\TServiceTypesController.cs">
+      <BrowseToURL>~/TServiceTypes</BrowseToURL>
+    </Compile>
     <Compile Include="Controllers\TUsersController.cs" />
     <Compile Include="Controllers\TVaccinationsController.cs" />
     <Compile Include="Controllers\TVisitMedicationsController.cs" />
@@ -173,10 +191,17 @@
     <Compile Include="Models\EmployeeInformation.cs" />
     <Compile Include="Models\HealthExam.cs" />
     <Compile Include="Models\Medication.cs" />
+
+    <Compile Include="Models\Reasons.cs" />
+
+    <Compile Include="Models\PetOwnerImage.cs" />
+
     <Compile Include="Models\Vaccination.cs" />
     <Compile Include="Models\VisitEmployeeViewModel.cs" />
     <Compile Include="Models\VisitMedicationViewModel.cs" />
+    <Compile Include="Models\Visits.cs" />
     <Compile Include="Models\VisitServiceViewModel.cs" />
+    <Compile Include="Models\OwnerHome.cs" />
     <Compile Include="Models\VisitSummary.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TAbdomenInfo.cs">
@@ -281,7 +306,13 @@
     <Compile Include="TVisitService.cs">
       <DependentUpon>Capstone.tt</DependentUpon>
     </Compile>
+    <Compile Include="uspSelectLatestPetImages1_Result.cs">
+      <DependentUpon>Capstone.tt</DependentUpon>
+    </Compile>
     <Compile Include="uspSelectLatestPetImages_Result.cs">
+      <DependentUpon>Capstone.tt</DependentUpon>
+    </Compile>
+    <Compile Include="uspSelectPetImages1_Result.cs">
       <DependentUpon>Capstone.tt</DependentUpon>
     </Compile>
     <Compile Include="uspSelectPetImages_Result.cs">
@@ -290,13 +321,49 @@
     <Compile Include="uspViewEmployees1_Result.cs">
       <DependentUpon>Capstone.tt</DependentUpon>
     </Compile>
+    <Compile Include="uspViewEmployees2_Result.cs">
+      <DependentUpon>Capstone.tt</DependentUpon>
+    </Compile>
+    <Compile Include="uspViewEmployees3_Result.cs">
+      <DependentUpon>Capstone.tt</DependentUpon>
+    </Compile>
+    <Compile Include="uspViewEmployees4_Result.cs">
+      <DependentUpon>Capstone.tt</DependentUpon>
+    </Compile>
+    <Compile Include="uspViewEmployees5_Result.cs">
+      <DependentUpon>Capstone.tt</DependentUpon>
+    </Compile>
     <Compile Include="uspViewEmployees_Result.cs">
       <DependentUpon>Capstone.tt</DependentUpon>
     </Compile>
     <Compile Include="uspViewMedications1_Result.cs">
       <DependentUpon>Capstone.tt</DependentUpon>
     </Compile>
+    <Compile Include="uspViewMedications2_Result.cs">
+      <DependentUpon>Capstone.tt</DependentUpon>
+    </Compile>
+    <Compile Include="uspViewMedications3_Result.cs">
+      <DependentUpon>Capstone.tt</DependentUpon>
+    </Compile>
+    <Compile Include="uspViewMedications4_Result.cs">
+      <DependentUpon>Capstone.tt</DependentUpon>
+    </Compile>
+    <Compile Include="uspViewMedications5_Result.cs">
+      <DependentUpon>Capstone.tt</DependentUpon>
+    </Compile>
     <Compile Include="uspViewMedications_Result.cs">
+      <DependentUpon>Capstone.tt</DependentUpon>
+    </Compile>
+    <Compile Include="uspViewOwnerPets1_Result.cs">
+      <DependentUpon>Capstone.tt</DependentUpon>
+    </Compile>
+    <Compile Include="uspViewOwnerPets2_Result.cs">
+      <DependentUpon>Capstone.tt</DependentUpon>
+    </Compile>
+    <Compile Include="uspViewOwnerPets3_Result.cs">
+      <DependentUpon>Capstone.tt</DependentUpon>
+    </Compile>
+    <Compile Include="uspViewOwnerPets4_Result.cs">
       <DependentUpon>Capstone.tt</DependentUpon>
     </Compile>
     <Compile Include="uspViewOwnerPets_Result.cs">
@@ -305,10 +372,34 @@
     <Compile Include="uspViewOwners1_Result.cs">
       <DependentUpon>Capstone.tt</DependentUpon>
     </Compile>
+    <Compile Include="uspViewOwners2_Result.cs">
+      <DependentUpon>Capstone.tt</DependentUpon>
+    </Compile>
+    <Compile Include="uspViewOwners3_Result.cs">
+      <DependentUpon>Capstone.tt</DependentUpon>
+    </Compile>
+    <Compile Include="uspViewOwners4_Result.cs">
+      <DependentUpon>Capstone.tt</DependentUpon>
+    </Compile>
+    <Compile Include="uspViewOwners5_Result.cs">
+      <DependentUpon>Capstone.tt</DependentUpon>
+    </Compile>
     <Compile Include="uspViewOwners_Result.cs">
       <DependentUpon>Capstone.tt</DependentUpon>
     </Compile>
     <Compile Include="uspViewPetGeneralInformation1_Result.cs">
+      <DependentUpon>Capstone.tt</DependentUpon>
+    </Compile>
+    <Compile Include="uspViewPetGeneralInformation2_Result.cs">
+      <DependentUpon>Capstone.tt</DependentUpon>
+    </Compile>
+    <Compile Include="uspViewPetGeneralInformation3_Result.cs">
+      <DependentUpon>Capstone.tt</DependentUpon>
+    </Compile>
+    <Compile Include="uspViewPetGeneralInformation4_Result.cs">
+      <DependentUpon>Capstone.tt</DependentUpon>
+    </Compile>
+    <Compile Include="uspViewPetGeneralInformation5_Result.cs">
       <DependentUpon>Capstone.tt</DependentUpon>
     </Compile>
     <Compile Include="uspViewPetGeneralInformation_Result.cs">
@@ -317,10 +408,34 @@
     <Compile Include="uspViewPetMedications1_Result.cs">
       <DependentUpon>Capstone.tt</DependentUpon>
     </Compile>
+    <Compile Include="uspViewPetMedications2_Result.cs">
+      <DependentUpon>Capstone.tt</DependentUpon>
+    </Compile>
+    <Compile Include="uspViewPetMedications3_Result.cs">
+      <DependentUpon>Capstone.tt</DependentUpon>
+    </Compile>
+    <Compile Include="uspViewPetMedications4_Result.cs">
+      <DependentUpon>Capstone.tt</DependentUpon>
+    </Compile>
+    <Compile Include="uspViewPetMedications5_Result.cs">
+      <DependentUpon>Capstone.tt</DependentUpon>
+    </Compile>
     <Compile Include="uspViewPetMedications_Result.cs">
       <DependentUpon>Capstone.tt</DependentUpon>
     </Compile>
     <Compile Include="uspViewPets1_Result.cs">
+      <DependentUpon>Capstone.tt</DependentUpon>
+    </Compile>
+    <Compile Include="uspViewPets2_Result.cs">
+      <DependentUpon>Capstone.tt</DependentUpon>
+    </Compile>
+    <Compile Include="uspViewPets3_Result.cs">
+      <DependentUpon>Capstone.tt</DependentUpon>
+    </Compile>
+    <Compile Include="uspViewPets4_Result.cs">
+      <DependentUpon>Capstone.tt</DependentUpon>
+    </Compile>
+    <Compile Include="uspViewPets5_Result.cs">
       <DependentUpon>Capstone.tt</DependentUpon>
     </Compile>
     <Compile Include="uspViewPets_Result.cs">
@@ -329,16 +444,55 @@
     <Compile Include="uspViewPetVaccinations1_Result.cs">
       <DependentUpon>Capstone.tt</DependentUpon>
     </Compile>
+    <Compile Include="uspViewPetVaccinations2_Result.cs">
+      <DependentUpon>Capstone.tt</DependentUpon>
+    </Compile>
+    <Compile Include="uspViewPetVaccinations3_Result.cs">
+      <DependentUpon>Capstone.tt</DependentUpon>
+    </Compile>
+    <Compile Include="uspViewPetVaccinations4_Result.cs">
+      <DependentUpon>Capstone.tt</DependentUpon>
+    </Compile>
+    <Compile Include="uspViewPetVaccinations5_Result.cs">
+      <DependentUpon>Capstone.tt</DependentUpon>
+    </Compile>
     <Compile Include="uspViewPetVaccinations_Result.cs">
       <DependentUpon>Capstone.tt</DependentUpon>
     </Compile>
     <Compile Include="uspViewPetVisits1_Result.cs">
       <DependentUpon>Capstone.tt</DependentUpon>
     </Compile>
+    <Compile Include="uspViewPetVisits2_Result.cs">
+      <DependentUpon>Capstone.tt</DependentUpon>
+    </Compile>
+    <Compile Include="uspViewPetVisits3_Result.cs">
+      <DependentUpon>Capstone.tt</DependentUpon>
+    </Compile>
+    <Compile Include="uspViewPetVisits4_Result.cs">
+      <DependentUpon>Capstone.tt</DependentUpon>
+    </Compile>
+    <Compile Include="uspViewPetVisits5_Result.cs">
+      <DependentUpon>Capstone.tt</DependentUpon>
+    </Compile>
+    <Compile Include="uspViewPetVisitsByPet_Result.cs">
+      <DependentUpon>Capstone.tt</DependentUpon>
+    </Compile>
     <Compile Include="uspViewPetVisits_Result.cs">
       <DependentUpon>Capstone.tt</DependentUpon>
     </Compile>
     <Compile Include="uspViewServices1_Result.cs">
+      <DependentUpon>Capstone.tt</DependentUpon>
+    </Compile>
+    <Compile Include="uspViewServices2_Result.cs">
+      <DependentUpon>Capstone.tt</DependentUpon>
+    </Compile>
+    <Compile Include="uspViewServices3_Result.cs">
+      <DependentUpon>Capstone.tt</DependentUpon>
+    </Compile>
+    <Compile Include="uspViewServices4_Result.cs">
+      <DependentUpon>Capstone.tt</DependentUpon>
+    </Compile>
+    <Compile Include="uspViewServices5_Result.cs">
       <DependentUpon>Capstone.tt</DependentUpon>
     </Compile>
     <Compile Include="uspViewServices_Result.cs">
@@ -366,11 +520,67 @@
     <Content Include="Content\Images\icon.PNG" />
     <Content Include="Content\Images\icon2.PNG" />
     <Content Include="Content\Images\icon3.PNG" />
+    <Content Include="Content\Images\LogoBanner.JPG" />
     <Content Include="Content\Images\medications.JPG" />
+    <Content Include="Content\Images\pawprint.jpg" />
     <Content Include="Content\Images\pets.JPG" />
     <Content Include="Content\Images\reports.JPG" />
     <Content Include="Content\Images\services.JPG" />
     <Content Include="Content\Images\wallpaper-1945409.jpg" />
+    <Content Include="Content\modal.js" />
+    <Content Include="Content\themes\base\accordion.css" />
+    <Content Include="Content\themes\base\all.css" />
+    <Content Include="Content\themes\base\autocomplete.css" />
+    <Content Include="Content\themes\base\base.css" />
+    <Content Include="Content\themes\base\button.css" />
+    <Content Include="Content\themes\base\core.css" />
+    <Content Include="Content\themes\base\datepicker.css" />
+    <Content Include="Content\themes\base\dialog.css" />
+    <Content Include="Content\themes\base\draggable.css" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_444444_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_555555_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_777620_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_777777_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cc0000_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Content\themes\base\jquery-ui.css" />
+    <Content Include="Content\themes\base\jquery-ui.min.css" />
+    <Content Include="Content\themes\base\menu.css" />
+    <Content Include="Content\themes\base\progressbar.css" />
+    <Content Include="Content\themes\base\resizable.css" />
+    <Content Include="Content\themes\base\selectable.css" />
+    <Content Include="Content\themes\base\selectmenu.css" />
+    <Content Include="Content\themes\base\slider.css" />
+    <Content Include="Content\themes\base\sortable.css" />
+    <Content Include="Content\themes\base\spinner.css" />
+    <Content Include="Content\themes\base\tabs.css" />
+    <Content Include="Content\themes\base\theme.css" />
+    <Content Include="Content\themes\base\tooltip.css" />
+    <Content Include="Rotativa\help-wkhtmltoimage.txt" />
+    <Content Include="Rotativa\help-wkhtmltopdf.txt" />
+    <Content Include="Rotativa\wkhtmltoimage.exe" />
+    <Content Include="Rotativa\wkhtmltopdf.exe" />
+    <Content Include="Scripts\Breeds.js" />
+    <Content Include="Scripts\JobTitles.js" />
+    <Content Include="Scripts\jquery-ui-1.12.1.js" />
+    <Content Include="Scripts\jquery-ui-1.12.1.min.js" />
+    <Content Include="Scripts\MedicationMethods.js" />
+    <Content Include="Scripts\PetTypes.js" />
+    <Content Include="Scripts\Roles.js" />
+    <Content Include="Scripts\ServiceType.js" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -384,6 +594,7 @@
     <Content Include="Capstone.edmx.diagram">
       <DependentUpon>Capstone.edmx</DependentUpon>
     </Content>
+    <Content Include="App_Browsers\qt.browser" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -395,6 +606,8 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\Users.js" />
+    <Content Include="Scripts\VisitReasons.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -438,46 +651,46 @@
     <Content Include="Views\TVisits\Edit.cshtml" />
     <Content Include="Views\TVisits\Index.cshtml" />
     <Content Include="Views\TJobTitles\Create.cshtml" />
-    <Content Include="Views\TJobTitles\Delete.cshtml" />
+    <Content Include="Views\TJobTitles\OrgDelete.cshtml" />
     <Content Include="Views\TJobTitles\Details.cshtml" />
     <Content Include="Views\TJobTitles\Edit.cshtml" />
     <Content Include="Views\TJobTitles\Index.cshtml" />
     <Content Include="Views\TBreeds\Create.cshtml" />
-    <Content Include="Views\TBreeds\Delete.cshtml" />
+    <Content Include="Views\TBreeds\OrgDelete.cshtml" />
     <Content Include="Views\TBreeds\Details.cshtml" />
     <Content Include="Views\TBreeds\Edit.cshtml" />
     <Content Include="Views\TBreeds\Index.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\TUsers\Create.cshtml" />
-    <Content Include="Views\TUsers\Delete.cshtml" />
+    <Content Include="Views\TUsers\OrgDelete.cshtml" />
     <Content Include="Views\TUsers\Details.cshtml" />
     <Content Include="Views\TUsers\Edit.cshtml" />
     <Content Include="Views\TUsers\Index.cshtml" />
     <Content Include="Views\TRoles\Create.cshtml" />
-    <Content Include="Views\TRoles\Delete.cshtml" />
+    <Content Include="Views\TRoles\OrgDelete.cshtml" />
     <Content Include="Views\TRoles\Details.cshtml" />
     <Content Include="Views\TRoles\Edit.cshtml" />
     <Content Include="Views\TRoles\Index.cshtml" />
     <Content Include="Views\TVisitReasons\Create.cshtml" />
-    <Content Include="Views\TVisitReasons\Delete.cshtml" />
+    <Content Include="Views\TVisitReasons\OrgDelete.cshtml" />
     <Content Include="Views\TVisitReasons\Details.cshtml" />
     <Content Include="Views\TVisitReasons\Edit.cshtml" />
     <Content Include="Views\TVisitReasons\Index.cshtml" />
     <Content Include="Views\TServiceTypes\Create.cshtml" />
-    <Content Include="Views\TServiceTypes\Delete.cshtml" />
+    <Content Include="Views\TServiceTypes\OrgDelete.cshtml" />
     <Content Include="Views\TServiceTypes\Details.cshtml" />
     <Content Include="Views\TServiceTypes\Edit.cshtml" />
     <Content Include="Views\TServiceTypes\Index.cshtml" />
     <Content Include="Views\Home\Settings.cshtml" />
     <Content Include="Views\TMethods\Create.cshtml" />
-    <Content Include="Views\TMethods\Delete.cshtml" />
+    <Content Include="Views\TMethods\OrgDelete.cshtml" />
     <Content Include="Views\TMethods\Details.cshtml" />
     <Content Include="Views\TMethods\Edit.cshtml" />
     <Content Include="Views\TMethods\Index.cshtml" />
     <Content Include="Views\Home\Help.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\TPetTypes\Create.cshtml" />
-    <Content Include="Views\TPetTypes\Delete.cshtml" />
+    <Content Include="Views\TPetTypes\OrgDelete.cshtml" />
     <Content Include="Views\TPetTypes\Details.cshtml" />
     <Content Include="Views\TPetTypes\Edit.cshtml" />
     <Content Include="Views\TPetTypes\Index.cshtml" />
@@ -500,6 +713,39 @@
     <Content Include="Views\VisitMedications\Index.cshtml" />
     <Content Include="Views\VisitEmployees\Index.cshtml" />
     <Content Include="Views\VisitSummary\Index.cshtml" />
+    <Content Include="Views\TServiceTypes\Update.cshtml" />
+    <Content Include="Views\TServiceTypes\Delete.cshtml" />
+    <Content Include="Views\TServiceTypes\Save.cshtml" />
+    <Content Include="Views\TBreeds\Save.cshtml" />
+    <Content Include="Views\TBreeds\Delete.cshtml" />
+    <Content Include="Views\TBreeds\Update.cshtml" />
+    <Content Include="Views\TJobTitles\Save.cshtml" />
+    <Content Include="Views\TJobTitles\Update.cshtml" />
+    <Content Include="Views\TJobTitles\Delete.cshtml" />
+    <Content Include="Views\TPetTypes\Save.cshtml" />
+    <Content Include="Views\TPetTypes\Update.cshtml" />
+    <Content Include="Views\TPetTypes\Delete.cshtml" />
+    <Content Include="Views\TMethods\Delete.cshtml" />
+    <Content Include="Views\TMethods\Update.cshtml" />
+    <Content Include="Views\TMethods\Save.cshtml" />
+    <Content Include="Views\TRoles\Delete.cshtml" />
+    <Content Include="Views\TRoles\Update.cshtml" />
+    <Content Include="Views\TRoles\Save.cshtml" />
+    <Content Include="Views\TUsers\Save.cshtml" />
+    <Content Include="Views\TUsers\Update.cshtml" />
+    <Content Include="Views\TUsers\Delete.cshtml" />
+
+    <Content Include="Views\TVisitReasons\Save.cshtml" />
+    <Content Include="Views\TVisitReasons\Update.cshtml" />
+    <Content Include="Views\TVisitReasons\Delete.cshtml" />
+    <Content Include="Views\TVisits\Invoice.cshtml" />
+
+    <Content Include="Views\Home\OwnerHome.cshtml" />
+    <Content Include="Views\TPetImages\PetOwnerHome.cshtml" />
+    <Content Include="Views\TPets\PetProfile.cshtml" />
+    <Content Include="Views\OwnerHome\OwnerHome.cshtml" />
+    <Content Include="Views\TPets\PetProfileEdit.cshtml" />
+
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,42 +1,42 @@
 ﻿@model test.TVisit
 
 @{
-    ViewBag.Title = "Details";
+	ViewBag.Title = "Details";
 }
+
 
 <h2>Details</h2>
 
 <div>
-    <h4>TVisit</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.intPetID)
-        </dt>
+	<h4>TVisit</h4>
+	<hr />
+	<dl class="dl-horizontal">
+		<dt>
+			@Html.DisplayNameFor(model => model.intPetID)
+		</dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.intPetID)
-        </dd>
+		<dd>
+			@Html.DisplayFor(model => model.intPetID)
+		</dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.dtmDateOfVist)
-        </dt>
+		<dt>
+			@Html.DisplayNameFor(model => model.dtmDateOfVist)
+		</dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.dtmDateOfVist)
-        </dd>
+		<dd>
+			@Html.DisplayFor(model => model.dtmDateOfVist)
+		</dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.TVisitReason.strVisitReason)
-        </dt>
+		<dt>
+			@Html.DisplayNameFor(model => model.TVisitReason.strVisitReason)
+		</dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.TVisitReason.strVisitReason)
-        </dd>
+		<dd>
+			@Html.DisplayFor(model => model.TVisitReason.strVisitReason)
+		</dd>
 
-    </dl>
+	</dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.intVisitID }) |
-    @Html.ActionLink("Back to List", "Index")
+	@Html.ActionLink("Edit", "Edit", new { id = Model.intVisitID }) |
+	@Html.ActionLink("Back to List", "Index")
 </p>

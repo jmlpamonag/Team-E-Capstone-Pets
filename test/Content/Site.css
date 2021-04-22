@@ -19,6 +19,7 @@
     /*dynamic width based on screensize*/
     max-width: 95%;
     margin: auto;
+    margin-top:15px;
     overflow: auto;
     /*dynamic height based on screensize*/
     max-height: calc(100vh - 200px);
@@ -173,16 +174,27 @@ h4{
     width: 200px;
     margin: 18px;
     background-color: cornflowerblue;
-    border: 3.2px solid black;
+    border: none;
     color: black;
     font-family: Calibri;
-    font-size: x-large
+    font-size: x-large;
+    overflow: hidden;
+    margin-right: 2em;
+    margin-bottom: 2em;
+    position: relative;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    -webkit-border-radius: 0.3em;
+    -moz-border-radius: 0.3em;
+    border-radius: 0.3em;
+    padding: 10px;
+    display: inline-block;
 }
+
+
 
 /* Darker background on mouse-over */
 .home-btn:hover {
     background-color: RoyalBlue;
-    border-color: midnightblue;
     color: white;
 }
 
@@ -206,7 +218,12 @@ h4{
     width: 900px;
     margin: auto;
 }
-
+.invisible-boxpet {
+    padding-top: 30px;
+    height: 625px;
+    width: fit-content();
+    margin: auto;
+}
 .center {
     display: block;
     margin-left: auto;
@@ -215,6 +232,14 @@ h4{
     width: 65%;
 }
 
+.centerimg {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+    max-width: 80%;
+    max-height: 120px;
+}
 
 footer {
     position: fixed;
@@ -229,7 +254,7 @@ footer {
     padding-top: 3px;
 }
 /* Style buttons */
-.home-btn {
+/*.home-btn {
     height: 200px;
     width: 200px;
     margin: 18px;
@@ -238,14 +263,14 @@ footer {
     color: black;
     font-family: Calibri;
     font-size: x-large
-}
+}*/
 
 /* Darker background on mouse-over */
-.home-btn:hover {
+/*.home-btn:hover {
     background-color: RoyalBlue;
     border-color: midnightblue;
     color:white;
-}
+}*/
 
 .link-icon-edit:before {
     display: inline-block;
@@ -272,4 +297,53 @@ footer {
     content: "\f2ed";
 }
 
+
+.modal-bg{
+    position:fixed;
+    width:100%;
+    height:100vh;
+    top: 0;
+    left: 0;
+    background-color: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s opacity 0.5s;
+}
+
+.bg-active{
+    visibility: visible;
+    opacity: 1;
+}
+
+.modal{
+    position: relative;
+    font-family: 'Montserrat', sans-serif;
+    background-color: white;
+    width: 30%;
+    height: 30%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+}
+
+.modal button{
+    padding: 10px 30px;
+    background-color: #2980b9;
+    color: white;
+    border: none;
+    font-family: 'Montserrat', sans-serif;
+    cursor: pointer;
+}
+
+.modal-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-weight: bold;
+    cursor: pointer;
+}
 

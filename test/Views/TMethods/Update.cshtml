@@ -1,0 +1,21 @@
+﻿@model test.TMethod
+
+<h2> Update Medication Method </h2>
+
+@using (Html.BeginForm("Update", "TMethods", FormMethod.Post, new { role = "form", id = "updateForm" })) {
+	@Html.ValidationSummary(true)
+	@Html.AntiForgeryToken()
+
+	<div class="form-group">
+		@Html.HiddenFor(model => model.intMethodID)
+		@Html.LabelFor(model => model.strMethod, "Medication Method:")
+		@Html.TextBoxFor(model => model.strMethod, new { @class = "form-control" })
+	</div>
+
+
+	<button type="submit" class="btn-primary">Update</button>
+
+	@Html.ActionLink("Back To List", "Index", null, new { @style = "margin-left:50px; font-weight:bold;" })
+	<div id="msg"></div>
+}
+

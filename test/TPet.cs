@@ -47,5 +47,6 @@ namespace test
         public virtual TPetType TPetType { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TVisit> TVisits { get; set; }
-    }
+		public TPetImage TPetImage { get; internal set; }
+	}
 }

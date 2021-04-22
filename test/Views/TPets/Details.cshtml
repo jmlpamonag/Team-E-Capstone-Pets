@@ -4,9 +4,10 @@
 	ViewBag.Title = "Details";
 }
 
-<h2><a href="@Url.Action("Details", "TPets", new {  id = Session["intPetID"]})">@ViewBag.PetName</h2>
+<h2 style="margin-bottom:0px; margin-top:10px">
+	@Html.DisplayFor(model => model.strPetName)
+</h2>
 <p style="margin-left: 25px; font-size:15px">
-
     <button class="btn-primary" onclick="location.href='@Url.Action("Index", "TPets")';return false;"><i class="fas fa-arrow-left"></i> Pet List</button>
 </p>
 
@@ -80,149 +81,171 @@
         </ul>
     </div>
 </div>
-<div class="body-content" style="padding-left: 0px; padding-right: 0px">
-    <div class="form-horizontal" style="padding-left:15px; padding-right:15px;">
-        <div>
-            <h4 style="text-decoration: none; padding-top: 10px; padding-left: 10px">
-                Pet Details
-                <a style="color:#f0ad4e; padding-left: 15px" href='@Url.Action("Edit", "TPets", new { id = Model.intPetID })' ;return false;>  <i class="fas fa-pencil-alt"></i></a>
-            </h4>
-            <hr style="margin:5px; margin-bottom: 15px" />
-            <dl class="dl-horizontal">
-                <dt>
-                    @Html.DisplayName("Tag #")
-                </dt>
+<div class="body-content" style="">
+	<div class="form-horizontal">
+		<div>
+			<h4 style="text-decoration: none; padding-top: 10px; padding-left: 10px">
+				Pet Details
+				<a style="color:#f0ad4e; padding-left: 15px" href='@Url.Action("Edit", "TPets", new { id = Model.intPetID })' ;return false;>  <i class="fas fa-pencil-alt"></i></a>
+			</h4>
+			<hr style="margin:5px; margin-bottom: 15px" />
+			<dl class="dl-horizontal">
+				@if (Model.TPetImages.Count > 0) {
+					<dt>
+						Image
+					</dt>
+					<dd>
+						<img src="/TPetImages/getimg?intPetImageID=@Model.TPetImages.First(f => f.strFileType == ".jpg").intPetImageID" alt="avatar" style="max-height:200px; max-width:200px" />
+					</dd>
+				}
+				else {
+					<dt>
+						Image
+					</dt>
+					<dd>
+						<img src="~/Content/Images/pawprint.jpg" />
+					</dd>
+				}
 
-                <dd>
-                    @Html.DisplayFor(model => model.strPetNumber)
-                </dd>
 
-                <dt>
-                    @Html.DisplayName("Microchip ID")
-                </dt>
 
-                <dd>
-                    @Html.DisplayFor(model => model.strMicrochipID)
-                </dd>
+				<dt>
+					@Html.DisplayName("Pet Name")
+				</dt>
 
-                <dt>
-                    @Html.DisplayName("Pet Name")
-                </dt>
+				<dd>
+					@Html.DisplayFor(model => model.strPetName)
+				</dd>
 
-                <dd>
-                    @Html.DisplayFor(model => model.strPetName)
-                </dd>
+				<dt>
+					@Html.DisplayName("Owner")
+				</dt>
 
-                <dt>
-                    @Html.DisplayName("Pet Type")
-                </dt>
+				<dd>
+					@Html.DisplayFor(model => model.TOwner.strFirstName)
+					@Html.DisplayFor(model => model.TOwner.strLastName)
+				</dd>
 
-                <dd>
-                    @Html.DisplayFor(model => model.TPetType.strPetType)
-                </dd>
+				<dt>
+					@Html.DisplayName("Tag #")
+				</dt>
 
-                <dt>
-                    @Html.DisplayName("Gender")
-                </dt>
+				<dd>
+					@Html.DisplayFor(model => model.strPetNumber)
+				</dd>
 
-                <dd>
-                    @Html.DisplayFor(model => model.TGender.strGender)
-                </dd>
+				<dt>
+					@Html.DisplayName("Microchip ID")
+				</dt>
 
-                <dt>
-                    @Html.DisplayName("Breed")
-                </dt>
+				<dd>
+					@Html.DisplayFor(model => model.strMicrochipID)
+				</dd>
 
-                <dd>
-                    @Html.DisplayFor(model => model.TBreed.strBreedName)
-                </dd>
 
-                <dt>
-                    @Html.DisplayName("Birthdate")
-                </dt>
+				<dt>
+					@Html.DisplayName("Pet Type")
+				</dt>
 
-                <dd>
-                    @Html.DisplayFor(model => model.dtmDateofBirth)
-                </dd>
+				<dd>
+					@Html.DisplayFor(model => model.TPetType.strPetType)
+				</dd>
 
-                <dt>
-                    @Html.DisplayName("Weight")
-                </dt>
+				<dt>
+					@Html.DisplayName("Gender")
+				</dt>
 
-                <dd>
-                    @Html.DisplayFor(model => model.dblWeight)
-                    lbs
-                </dd>
+				<dd>
+					@Html.DisplayFor(model => model.TGender.strGender)
+				</dd>
 
-                <dt>
-                    @Html.DisplayName("Blind")
-                </dt>
+				<dt>
+					@Html.DisplayName("Breed")
+				</dt>
 
-                <dd>
-                    @Html.DisplayFor(model => model.isBlind)
-                </dd>
+				<dd>
+					@Html.DisplayFor(model => model.TBreed.strBreedName)
+				</dd>
 
-                <dt>
-                    @Html.DisplayName("Deaf")
-                </dt>
+				<dt>
+					@Html.DisplayName("Birthdate")
+				</dt>
 
-                <dd>
-                    @Html.DisplayFor(model => model.isDeaf)
-                </dd>
+				<dd>
+					@Html.DisplayFor(model => model.dtmDateofBirth)
+				</dd>
 
-                <dt>
-                    @Html.DisplayName("Aggressive")
-                </dt>
+				<dt>
+					@Html.DisplayName("Weight")
+				</dt>
 
-                <dd>
-                    @Html.DisplayFor(model => model.isAggressive)
-                </dd>
+				<dd>
+					@Html.DisplayFor(model => model.dblWeight)
+					lbs
+				</dd>
 
-                <dt>
-                    @Html.DisplayName("Deceased")
-                </dt>
+				<dt>
+					@Html.DisplayName("Blind")
+				</dt>
 
-                <dd>
-                    @Html.DisplayFor(model => model.isDeceased)
-                </dd>
+				<dd>
+					@Html.DisplayFor(model => model.isBlind)
+				</dd>
 
-                <dt>
-                    @Html.DisplayName("Allergies")
-                </dt>
+				<dt>
+					@Html.DisplayName("Deaf")
+				</dt>
 
-                <dd>
-                    @Html.DisplayFor(model => model.isAllergic)
-                </dd>
+				<dd>
+					@Html.DisplayFor(model => model.isDeaf)
+				</dd>
 
-                <dt>
-                    @Html.DisplayName("Color")
-                </dt>
+				<dt>
+					@Html.DisplayName("Aggressive")
+				</dt>
 
-                <dd>
-                    @Html.DisplayFor(model => model.strColor)
-                </dd>
+				<dd>
+					@Html.DisplayFor(model => model.isAggressive)
+				</dd>
 
-                <dt>
-                    @Html.DisplayName("Notes")
-                </dt>
+				<dt>
+					@Html.DisplayName("Deceased")
+				</dt>
 
-                <dd>
-                    @Html.DisplayFor(model => model.strNotes)
-                </dd>
+				<dd>
+					@Html.DisplayFor(model => model.isDeceased)
+				</dd>
 
-                <dt>
-                    @Html.DisplayName("Owner")
-                </dt>
+				<dt>
+					@Html.DisplayName("Allergies")
+				</dt>
 
-                <dd>
-                    @Html.DisplayFor(model => model.TOwner.strFirstName)
-                    @Html.DisplayFor(model => model.TOwner.strLastName)
-                </dd>
+				<dd>
+					@Html.DisplayFor(model => model.isAllergic)
+				</dd>
 
-            </dl>
-            <p>
-                <button class="btn-warning" onclick="location.href='@Url.Action("Edit", "TPets", new { id = Model.intPetID })';return false;"><i class="fas fa-pencil-alt"></i> Edit</button>
-            </p>
-        </div>
-    </div>
+				<dt>
+					@Html.DisplayName("Color")
+				</dt>
+
+				<dd>
+					@Html.DisplayFor(model => model.strColor)
+				</dd>
+
+				<dt>
+					@Html.DisplayName("Notes")
+				</dt>
+
+				<dd>
+					@Html.DisplayFor(model => model.strNotes)
+				</dd>
+
+
+
+			</dl>
+			<p>
+				<button class="btn-warning" onclick="location.href='@Url.Action("Edit", "TPets", new { id = Model.intPetID })';return false;"><i class="fas fa-pencil-alt"></i> Edit</button>
+			</p>
+		</div>
+	</div>
 </div>

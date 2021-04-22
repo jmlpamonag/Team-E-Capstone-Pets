@@ -1,0 +1,184 @@
+﻿@model test.TPet
+
+@{
+	ViewBag.Title = "PetProfile";
+}
+
+
+	<h2>
+		@Html.DisplayFor(model => model.strPetName)
+	</h2>
+	<p style="margin-left: 25px; font-size:15px">
+		<button class="btn-primary" onclick="location.href='@Url.Action("OwnerHome", "Home", new { id = Model.intOwnerID })';return false;"><i class="fas fa-arrow-left"></i> Back To My Pets</button>
+	</p>
+
+	<style>
+		h2 {
+			text-decoration: none;
+		}
+
+		h2 > a {
+			color: black;
+			text-decoration: none;
+		}
+
+		h2 > a:hover, a:focus {
+			color: cornflowerblue;
+			text-decoration: none;
+		}
+
+		dt {
+			white-space: nowrap
+		}
+
+		dd {
+			white-space: nowrap
+		}
+
+		.topnav {
+			overflow: hidden;
+			background-color: #333;
+			height: 40px;
+			max-width: 95%;
+			margin: auto;
+		}
+
+		.topnav > ul {
+			list-style: none;
+			padding-inline-start: unset;
+		}
+
+		.topnav > ul > li {
+			float: left;
+			color: #9d9d9d;
+			text-align: center;
+			padding: 10px 60px;
+			text-decoration: none;
+			font-size: 15px;
+		}
+
+		.topnav > ul > li > a {
+			color: whitesmoke;
+			text-decoration: none;
+		}
+
+		.topnav ul li:hover {
+			background-color: grey;
+			color: black;
+		}
+
+		.topnav ul li.active {
+			background-color: #6495ed;
+			color: white;
+		}
+	</style>
+
+	<div class="form-horizontal">
+
+		<div class="topnav">
+			<ul>
+				<li class="active">@Html.ActionLink("General", "Details", "TPets")</li>
+				<li>@Html.ActionLink("Visits", "PetVisits", "TVisits", new { id = Model.intPetID }, null)</li>
+				<li>@Html.ActionLink("Vaccinations", "PetVaccinations", "TVaccinations", new { id = Model.intPetID }, null)</li>
+				<li>@Html.ActionLink("Medications", "PetMedications", "TVisitMedications", new { id = Model.intPetID }, null)</li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="body-content" style="padding:20px; ">
+
+		<div class="form-horizontal">
+			<p style="right:auto">
+				<button class="btn-warning" onclick="location.href='@Url.Action("PetProfileEdit", "TPets", new { id = Model.intPetID })';return false;"><i class="fas fa-pencil-alt"></i> Edit</button>
+			</p>
+			<div style="float:left; padding-left:50px; margin-right:70px">
+
+				<div>
+					<img src="/TPetImages/getimg?intPetImageID=@Model.TPetImages.First(f => f.strFileType == ".jpg").intPetImageID" alt="avatar" style="max-height:200px; max-width:200px;border:solid; border-width:7px" />
+				</div>
+
+
+				<div style="padding-top:10px">
+					<b>@Html.DisplayName("Name : ")</b>
+					@Html.DisplayFor(model => model.strPetName)
+				</div>
+
+				<div>
+					<b>@Html.DisplayName("Owner Name : ")</b>
+					@Html.DisplayFor(model => model.TOwner.strFirstName)
+					@Html.DisplayFor(model => model.TOwner.strLastName)
+				</div>
+
+				<div>
+					<b>@Html.DisplayName("Pet Type : ")</b>
+
+					@Html.DisplayFor(model => model.TPetType.strPetType)
+				</div>
+
+
+				@*<p>
+						<button class="btn-warning" onclick="location.href='@Url.Action("Edit", "TPets", new { id = Model.intPetID })';return false;"><i class="fas fa-pencil-alt"></i> Edit</button>
+					</p>*@
+			</div>
+
+			<div style=" display:inline-block;">
+				<div style=" display:inline-block; margin: 50px; float:left; ">
+					<div>
+						<h3 style="margin-top:0px; letter-spacing:3px">About</h3>
+						<div>
+							<div style="text-align:left;">
+								<b>@Html.DisplayName("Gender : ") </b>
+								@Html.DisplayFor(model => model.TGender.strGender)<br>
+
+								<b>@Html.DisplayName("Breed : ") </b>
+								@Html.DisplayFor(model => model.TBreed.strBreedName)<br>
+
+								<b>@Html.DisplayName("Birthdate : ")</b>
+								@Html.DisplayFor(model => model.dtmDateofBirth)<br>
+
+								<b>@Html.DisplayName("Color : ")</b>
+								@Html.DisplayFor(model => model.strColor)<br>
+
+								<b>@Html.DisplayName("Weight : ")</b>
+								@Html.DisplayFor(model => model.dblWeight)
+								lbs
+							</div>
+
+						</div>
+					</div>
+				</div>
+
+
+				<div style=" display:inline-block; margin: 50px">
+
+					<div>
+						<h3 style="margin-top:0px; letter-spacing:3px">Contact Info</h3>
+						<div>
+							<div style="text-align:left">
+								<b>@Html.DisplayName("Owner Name : ")</b>
+								@Html.DisplayFor(model => model.TOwner.strFirstName)
+								@Html.DisplayFor(model => model.TOwner.strLastName)<br>
+
+								<b>@Html.DisplayName("Phone: ")</b>
+								@Html.DisplayFor(model => model.TOwner.strPhoneNumber)<br>
+
+								<b>@Html.DisplayName("Email: ")</b>
+								@Html.DisplayFor(model => model.TOwner.strEmail)<br>
+
+								<b>@Html.DisplayName("Address: ")</b><br>
+								&ensp;@Html.DisplayFor(model => model.TOwner.strAddress)<br>
+								&ensp;@Html.DisplayFor(model => model.TOwner.strCity),
+								&ensp;@Html.DisplayFor(model => model.TOwner.TState.strStateCode)
+								&ensp;@Html.DisplayFor(model => model.TOwner.strZip)
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+			@*<p>
+					<button class="btn-warning" onclick="location.href='@Url.Action("Edit", "TPets", new { id = Model.intPetID })';return false;"><i class="fas fa-pencil-alt"></i> Edit</button>
+				</p>*@
+		</div>
+
+	</div>

@@ -15,12 +15,11 @@ namespace test
     public partial class TPetImage
     {
         public int intPetImageID { get; set; }
-        public int intPetID { get; set; }
-        public string imgPrimaryImage { get; set; }
-        public byte[] imgImage { get; set; }
         public string strFileName { get; set; }
-        public int intImageSize { get; set; }
-        public System.DateTime dtmDateAdded { get; set; }
+        public string strContentType { get; set; }
+        public byte[] imgContent { get; set; }
+        public string strFileType { get; set; }
+        public int intPetID { get; set; }
     
         public virtual TPet TPet { get; set; }
     }

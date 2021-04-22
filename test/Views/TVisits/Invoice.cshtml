@@ -1,0 +1,247 @@
+﻿@model test.Models.Visits
+
+@{
+	ViewBag.Title = "Invoice";
+}
+
+@{
+	Layout = null;
+}
+
+<style type="text/css">
+
+	body {
+		padding-top: 50px;
+		padding-bottom: 20px;
+		background-size: cover;
+		background-color: white;
+	}
+
+	.body-content {
+		padding-left: 15px;
+		padding-right: 15px;
+		height: auto;
+		overflow-y: auto;
+		width: auto;
+		/*margin: 25px;*/
+		align-content: center;
+		vertical-align: middle;
+		margin: auto;
+		display: table;
+		border: outset;
+		border-width: thick;
+		box-sizing: unset;
+		padding-top: unset;
+		padding-bottom: 15px;
+		position: absolute;
+		top: 30%;
+		left: 43%;
+	}
+
+	.btn {
+		width: -webkit-fill-available;
+		background-color: royalblue;
+		border-radius: 25px;
+		height: 25px;
+		color: white;
+	}
+
+	input[type=text], [type=password] {
+		width: 100%;
+		padding: 12px 20px;
+		margin: 8px 0;
+		box-sizing: border-box;
+	}
+
+	.img {
+		height: 50px;
+		width: 75px;
+		margin-left: 69px;
+		margin-bottom: 15px;
+	}
+
+	h4 {
+		display: block;
+		font-size: 2em;
+		margin-block-start: 0.70em;
+		margin-block-end: 0.67em;
+		margin-inline-start: 8px;
+		margin-inline-end: 0px;
+		font-weight: bold;
+	}
+
+	caption {
+		display: table-caption;
+		text-align: center;
+	}
+</style>
+
+@*<h2>Invoice</h2>*@
+
+
+
+<h4>Invoice</h4>
+
+<br />
+<br />
+
+<hr />
+
+<table>
+
+	<caption>Pet</caption>
+
+	<tr>
+		<td>Pet Number:  </td>
+		<td>@Html.DisplayFor(model => model.strPetNumber)</td>
+	</tr>
+
+	<tr>
+		<td>Pet Name:  </td>
+		<td>@Html.DisplayFor(model => model.strPetName)</td>
+	</tr>
+
+	<tr>
+		<td>Breed:  </td>
+		<td>@Html.DisplayFor(model => model.strBreed)</td>
+	</tr>
+
+	<tr>
+		<td>Weight:  </td>
+		<td>@Html.DisplayFor(model => model.dblWeight)</td>
+	</tr>
+
+	<tr>
+		<td>Gender:  </td>
+		<td>@Html.DisplayFor(model => model.strGender)</td>
+	</tr>
+
+</table>
+
+<br />
+<br />
+
+<hr />
+<table>
+	<caption>Owner</caption>
+
+	<tr>
+		<td>Owner:  </td>
+		<td>@Html.DisplayFor(model => model.strOwnerName)</td>
+	</tr>
+
+	<tr>
+		<td>Address:  </td>
+		<td>@Html.DisplayFor(model => model.strAddress)</td>
+	</tr>
+
+	<tr>
+		<td>City:  </td>
+		<td>@Html.DisplayFor(model => model.strCity)</td>
+	</tr>
+
+	<tr>
+		<td>State:  </td>
+		<td>@Html.DisplayFor(model => model.strState)</td>
+	</tr>
+
+	<tr>
+		<td>Zip:  </td>
+		<td>@Html.DisplayFor(model => model.strZip)</td>
+	</tr>
+
+	<tr>
+		<td>Contact Phone:  </td>
+		<td>@Html.DisplayFor(model => model.strPhone)</td>
+	</tr>
+
+	<tr>
+		<td>Contact Email:  </td>
+		<td>@Html.DisplayFor(model => model.strEmail)</td>
+	</tr>
+
+</table>
+
+
+<br />
+<br />
+
+<hr />
+<table>
+	<caption>Visit Summary</caption>
+
+	<tr>
+		<td>Date Of Visit:  </td>
+		<td>@Html.DisplayFor(model => model.dtmOfVisit)</td>
+	</tr>
+
+	<tr>
+		<td>Visit Reason:  </td>
+		<td>@Html.DisplayFor(model => model.strVisitReason)</td>
+	</tr>
+
+</table>
+
+<br />
+<br />
+<hr />
+
+@if (Model.VisitService.Count() > 0) {
+	<table>
+		<caption class="caption">Service Summary</caption>
+
+
+		@foreach (TVisitService service in Model.VisitService) {
+
+			<tr>
+				<td>Service Provided:  </td>
+				<td>@service.TService.strServiceDesc</td>
+			</tr>
+
+			<tr>
+				<td>Service Dollar Amount:  </td>
+				<td>$ @Math.Round(service.TService.dblPrice, 2)</td>
+			</tr>
+
+		}
+
+
+	</table>
+}
+
+
+<hr />
+@if (Model.VisitMed.Count() > 0) {
+	<table>
+		<caption>Medication Summary</caption>
+
+
+		@foreach (TVisitMedication medication in Model.VisitMed) {
+
+			<tr>
+				<td>Medication:  </td>
+				<td>@medication.TMedication.strMedicationName</td>
+			</tr>
+
+			<tr>
+				<td>Medication Description:  </td>
+				<td>@medication.TMedication.strMedicationDesc</td>
+			</tr>
+
+			<tr>
+				<td>Quantity:  </td>
+				<td>@medication.TMedication.intQuantity</td>
+			</tr>
+
+			<tr>
+				<td>Amount:  </td>
+				<td>$ @Math.Round(medication.TMedication.dblPrice, 2)</td>
+			</tr>
+
+		}
+
+
+	</table>
+
+
+}

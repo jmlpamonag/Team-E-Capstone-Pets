@@ -1,51 +1,71 @@
-﻿@model IEnumerable<test.TServiceType>
-
-@{
-    ViewBag.Title = "Index";
-}
-
-<h2>ServiceTypes</h2>
-
-<p style="margin-left: 25px">
-    <button class="btn-success" onclick="location.href='@Url.Action("Create", "TServiceTypes")';return false;">
-        <i class="fas fa-plus"></i>  Create New
-    </button>
-</p>
-
 <div class="body-content">
-    <div class="form-horizontal">
-        <table class="table">
-            <tr>
-               
-                <th>
-                    @Html.DisplayName("Service Type")
-                </th>
-                
-                <th style="white-space:nowrap">
-                    @Html.DisplayName("View | Edit | Delete")
-                </th>
-            </tr>
-
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.strServiceType)
-                    </td>
-                   
-
-                    
 
 
-                    <td style="white-space:nowrap">
-                        <a style="color:#5cb85c; padding-left: 15px" href='@Url.Action("Details", "TServiceTypes", new { id = item.intServiceTypeID })' ;return false;>  <i class="far fa-eye"></i></a>
-                        <a style="color:#f0ad4e; padding-left: 15px" href='@Url.Action("Edit", "TServiceTypes", new { id = item.intServiceTypeID })' ;return false;>  <i class="fas fa-pencil-alt"></i></a>
-                        <a style="color:red; padding-left: 15px" href='@Url.Action("Delete", "TServiceTypes", new { id = item.intServiceTypeID })' ;return false;>  <i class="fas fa-trash-alt"></i></a>
-                    </td>
-                </tr>
-            }
+	<h2 style="background-color: white;color: black; text-align: center; font-style: oblique">Report Of Service Types Offered</h2>
 
-        </table>
-    </div>
+
+	@Html.ActionLink("Create New", "Save", "TServiceTypes", null, new { @style = "font-size:22px;", @class = "popup" })
+
+
+
+	<div id="update_panel">
+		@* This will be formatted and pulled from the JS file. *@
+	</div>
+
+	@* Add Jquery UI Css *@
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
+
+	<style>
+		table {
+			font-family: arial, sans-serif;
+			border-collapse: collapse;
+			width: 100%;
+		}
+
+		td, th {
+			border: 1px solid #dddddd;
+			text-align: left;
+			padding: 8px;
+		}
+
+		tr:nth-child(even) {
+			background-color: #dddddd;
+		}
+
+		.ui-widget-header {
+			border: none !important;
+			background: none !important;
+			color: #222222;
+			font-weight: bold;
+		}
+
+		.ui-state-default, .ui-state-hover {
+			border: none !important;
+			background: none !important;
+		}
+
+		.ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset {
+			float: none;
+		}
+
+		.ui-dialog {
+			webkit-box-shadow: 0 5px 15px rgba(0,0,0,.5);
+			box-shadow: 0 5px 15px rgba(0,0,0,.5);
+		}
+
+		.ui-dialog-buttonset {
+			position: inherit;
+		}
+
+		h2 {
+			margin-top: 0px;
+			font-size: 30px;
+		}
+	</style>
+
 </div>
+	@section Scripts{
+		<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+		<script src="~/Scripts/ServiceType.js"></script>
+	}
 

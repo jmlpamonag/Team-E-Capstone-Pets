@@ -10,99 +10,129 @@
 
 <style type="text/css">
 
-	body {
-		padding-top: 50px;
-		padding-bottom: 20px;
-		background-image: url(../../Content/Images/wallpaper-1945409.jpg);
-		background-size: cover;
+	header .header {
 		background-color: #fff;
+		height: 45px;
 	}
 
-    .body-content {
-        padding-left: 15px;
-        padding-right: 15px;
-        height: auto;
-        overflow-y: auto;
-        width: auto;
-        /*margin: 25px;*/
-        align-content: center;
-        vertical-align: middle;
-        margin: auto;
-        display: table;
-        border: outset;
-        border-width: thick;
-        box-sizing: unset;
-        padding-top: unset;
-        padding-bottom: 15px;
-        position: absolute;
-        top: 30%;
-        left: 43%;
-    }
-
-	.btn {
-		width: -webkit-fill-available;
-		background-color: royalblue;
-		border-radius: 25px;
-		height: 25px;
-		color: white;
+	header a img {
+		width: 134px;
+		margin-top: 4px;
 	}
 
-	input[type=text],[type=password] {
+	.login-page {
+		width: 360px;
+		padding: 8% 0 0;
+		margin: auto;
+	}
+
+	.login-page .form .login {
+		margin-top: -31px;
+		margin-bottom: 26px;
+	}
+
+	.form {
+		position: relative;
+		z-index: 1;
+		background: #FFFFFF;
+		max-width: 360px;
+		margin: 0 auto 100px;
+		padding: 45px;
+		text-align: center;
+		box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+	}
+
+	.form input {
+		font-family: "Roboto", sans-serif;
+		outline: 0;
+		background: #f2f2f2;
 		width: 100%;
-		padding: 12px 20px;
-		margin: 8px 0;
+		border: 0;
+		margin: 0 0 15px;
+		padding: 15px;
 		box-sizing: border-box;
+		font-size: 14px;
 	}
 
-	.img {
-		height: 50px;
-		width: 75px;
-		margin-left: 69px;
-		margin-bottom: 15px;
+	.form button {
+		font-family: "Roboto", sans-serif;
+		text-transform: uppercase;
+		outline: 0;
+		background-color: cornflowerblue;
+		background-image: linear-gradient(45deg,#328f8a,#0816ac);
+		width: 100%;
+		border: 0;
+		padding: 15px;
+		color: #FFFFFF;
+		font-size: 14px;
+		-webkit-transition: all 0.3 ease;
+		transition: all 0.3 ease;
+		cursor: pointer;
 	}
 
-	h1 {
-		display: block;
-		font-size: 2em;
-		margin-block-start: 0.70em;
-		margin-block-end: 0.67em;
-		margin-inline-start: 8px;
-		margin-inline-end: 0px;
-		font-weight: bold;
+	.form .message {
+		margin: 15px 0 0;
+		color: #b3b3b3;
+		font-size: 12px;
+	}
+
+	.form .message a {
+		color: #4CAF50;
+		text-decoration: none;
+	}
+
+	.container {
+		position: relative;
+		z-index: 1;
+		max-width: 300px;
+		margin: 0 auto;
+	}
+
+
+	body {
+		background-color: cornflowerblue;
+		background-image: linear-gradient(45deg,#328f8a,#0816ac);
+		font-family: "Roboto", sans-serif;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
 	}
 </style>
 
+<!DOCTYPE html>
+<html>
 
-
-
-@using (Html.BeginForm()) {
-
-	@Html.AntiForgeryToken()
-
-<div class="body-content">
-
-	<h1>Please Sign In</h1>
-	<div>
-		<img src="~/Content/Images/companylogo.jpg" class="img"/>
+<body>
+	<div style="background-color:black">
+		<img src="~/Content/Images/LogoBanner.JPG" style="height:100px;"/>
 	</div>
-	<div class="form-group">
-		@Html.TextBoxFor(m => m.strUserName, new { @class = "form-control", placeholder = "Username", autofocus = "true" })
-		@Html.ValidationMessageFor(m => m.strUserName)
-	</div>
-	<div class="form-group">
-		@Html.PasswordFor(m => m.strPassword, new { @class = "form-control", placeholder = "Password" })
-		@Html.ValidationMessageFor(m => m.strPassword)
-	</div>
-	<div class="btn">
-		<div class="form-group">
-			<button type="submit" class="w-100 btn btn-lg btn-primary">Login</button>
+	<body>
+
+		<div class="login-page">
+			<div class="form">
+				<div class="login">
+					<div class="login-header">
+						<h3 style="letter-spacing:1px">LOGIN</h3>
+						<p>Please enter your credentials</p>
+					</div>
+				</div>
+				@using (Html.BeginForm(FormMethod.Post)) {
+					@Html.AntiForgeryToken()
+					<form class="login-form">
+						<div class="item">
+							@*<div>@Html.DisplayName("Username")</div>*@
+							<div placeholder="Username">@Html.TextBoxFor(model => model.strUserName, new { @autofocus = "autofocus" })</div>
+						</div>
+						<div class="item">
+							@*<div>@Html.DisplayName("Password")</div>*@
+							<div placeholder="Password">@Html.TextBoxFor(model => model.strPassword, new { type = "password" })</div>
+						</div>
+						<button id="btnSignIn" name="btnSubmit" value="signin"><i class="fas fa-sign-in-alt"></i> Sign-In</button>
+					</form>
+				}
+			</div>
 		</div>
-	</div>
-</div>
-		}
-
-
-
-
+	</body>
+</body>
+</html>
 
 

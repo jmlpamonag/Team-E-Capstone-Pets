@@ -1,0 +1,94 @@
+﻿@model test.TPet
+
+@{
+	ViewBag.Title = "PetProfileEdit";
+}
+
+<h2>Edit (@Html.DisplayFor(model => model.strPetName))</h2>
+
+<p style="margin-left: 30px">
+	<button class="btn-primary" onclick="location.href='@Url.Action("PetProfile", "TPets")';return false;">
+		<i class="fas fa-arrow-left"></i>  Back to List
+	</button>
+</p>
+@using (Html.BeginForm("PetProfileEdit", "TPets", null, FormMethod.Post, new { enctype = "multipart/form-data" })) {
+	@Html.AntiForgeryToken()
+
+	<div class="body-content">
+		<div class="form-horizontal">
+			@*<h4 style="text-decoration: none; padding-top: 10px; padding-left: 10px">
+			Edit Pet
+			<button class="btn-success" type="submit" style="margin-left: 15px; font-size:smaller">
+				<i class="far fa-save"></i> Save
+			</button>
+		</h4>*@
+			<hr style="margin:5px; margin-bottom: 15px" />
+			@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+			@Html.HiddenFor(model => model.intPetID)
+
+
+			<div class="form-group">
+				@Html.Label("Picture", new { @class = "control-label col-md-2" })
+				<div class="col-md-10">
+					<input type="file" id="Image" name="upload" />
+				</div>
+			</div>
+
+			<div class="form-group">
+				@Html.LabelFor(model => model.TOwner.strAddress, "Address", htmlAttributes: new { @class = "control-label col-md-2" })
+				<div class="col-md-10">
+					@Html.EditorFor(model => model.TOwner.strAddress, new { htmlAttributes = new { @class = "form-control" } })
+					@Html.ValidationMessageFor(model => model.TOwner.strAddress, "", new { @class = "text-danger" })
+				</div>
+			</div>
+			<div class="form-group">
+				@Html.LabelFor(model => model.TOwner.strCity, "City", htmlAttributes: new { @class = "control-label col-md-2" })
+				<div class="col-md-10">
+					@Html.EditorFor(model => model.TOwner.strCity, new { htmlAttributes = new { @class = "form-control" } })
+					@Html.ValidationMessageFor(model => model.TOwner.strCity, "", new { @class = "text-danger" })
+				</div>
+			</div>
+			<div class="form-group">
+				@Html.LabelFor(model => model.TOwner.TState.intStateID, "State", htmlAttributes: new { @class = "control-label col-md-2" })
+				<div class="col-md-10">
+					@Html.DropDownList("intStateID", null, htmlAttributes: new { @class = "form-control" })
+					@Html.ValidationMessageFor(model => model.TOwner.TState.intStateID, "", new { @class = "text-danger" })
+				</div>
+			</div>
+			<div class="form-group">
+				@Html.LabelFor(model => model.TOwner.strZip, "Zip Code", htmlAttributes: new { @class = "control-label col-md-2" })
+				<div class="col-md-10">
+					@Html.EditorFor(model => model.TOwner.strZip, new { htmlAttributes = new { @class = "form-control" } })
+					@Html.ValidationMessageFor(model => model.TOwner.strZip, "", new { @class = "text-danger" })
+				</div>
+			</div>
+
+			<div class="form-group">
+				@Html.LabelFor(model => model.TOwner.strPhoneNumber, "Phone Number", htmlAttributes: new { @class = "control-label col-md-2" })
+				<div class="col-md-10">
+					@Html.EditorFor(model => model.TOwner.strPhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+					@Html.ValidationMessageFor(model => model.TOwner.strPhoneNumber, "", new { @class = "text-danger" })
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-md-offset-2 col-md-10" style="margin:unset">
+					<button style="margin:5px" class="btn-success" type="submit">
+						<i class="far fa-save"></i> Save
+					</button>
+					<button style="margin:5px" class="btn-warning" onclick="location.href='@Url.Action("PetProfile", "TPets", new { id = Model.intPetID })';return false;">
+						<i class="fas fa-times"></i>  Cancel
+					</button>
+				</div>
+				<div>
+
+				</div>
+
+			</div>
+		</div>
+	</div>
+}
+
+
+@section Scripts {
+	@Scripts.Render("~/bundles/jqueryval")
+}

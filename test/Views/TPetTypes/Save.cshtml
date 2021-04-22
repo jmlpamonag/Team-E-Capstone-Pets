@@ -1,0 +1,23 @@
+﻿@model test.TPetType
+
+<h2> New Pet Type </h2>
+
+
+@using (Html.BeginForm("Save", "TPetTypes", FormMethod.Post, new { role = "form", id = "saveForm" })) {
+
+
+	@Html.ValidationSummary(true)
+	@Html.AntiForgeryToken()
+
+	<div class="form-group">
+		@Html.HiddenFor(model => model.intPetTypeID)
+		@Html.LabelFor(model => model.strPetType, "Pet Type:")
+		@Html.TextBoxFor(model => model.strPetType, new { @class = "form-control" })
+	</div>
+
+	<button type="submit" class="btn-primary">Save</button>
+
+	@Html.ActionLink("Back To List", "Index", null, new { @style = "margin-left:50px; font-weight:bold;" })
+	<div id="msg"></div>
+}
+

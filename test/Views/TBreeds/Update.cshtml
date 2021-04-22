@@ -1,0 +1,23 @@
+﻿@model test.TBreed
+
+
+
+<h2> Update Breed </h2>
+
+@using (Html.BeginForm("Update", "TBreeds", FormMethod.Post, new { role = "form", id = "updateForm" })) {
+	@Html.ValidationSummary(true)
+	@Html.AntiForgeryToken()
+
+	<div class="form-group">
+		@Html.HiddenFor(model => model.intBreedID)
+		@Html.LabelFor(model => model.strBreedName, "Breed:")
+		@Html.TextBoxFor(model => model.strBreedName, new { @class = "form-control" })
+	</div>
+
+
+	<button type="submit" class="btn-primary">Update</button>
+
+	@Html.ActionLink("Back To List", "Index", null, new { @style = "margin-left:50px; font-weight:bold;" })
+	<div id="msg"></div>
+}
+

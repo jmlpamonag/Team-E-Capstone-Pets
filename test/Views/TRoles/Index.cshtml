@@ -1,41 +1,128 @@
-﻿@model IEnumerable<test.TRole>
+﻿@*@model IEnumerable<test.TRole>
+
+	@{
+		ViewBag.Title = "Index";
+	}
+
+	<h2>Role Report</h2>
+
+	<p>
+		@Html.ActionLink("Create New", "Create")
+	</p>
+
+	<div class="body-content">
+
+		<table class="table">
+			<tr>
+				<th>
+					Role
+				</th>
+			</tr>
+
+			@foreach (var item in Model) {
+				<tr>
+					<td>
+						@Html.DisplayFor(modelItem => item.strRoleName)
+					</td>
+					<td>
+						@Html.ActionLink("Edit", "Edit", new { id = item.intRoleID }, new { @class = "link-icon-edit" })
+					</td>
+					<td>
+						@Html.ActionLink("Details", "Details", new { id = item.intRoleID }, new { @class = "link-icon-details" })
+					</td>
+					<td>
+						@Html.ActionLink("Delete", "Delete", new { id = item.intRoleID }, new { @class = "link-icon-delete" })
+					</td>
+				</tr>
+			}
+
+		</table>
+		</div>*@
+
 
 @{
-    ViewBag.Title = "Index";
+	ViewBag.Title = "List Of User Roles";
 }
-
-<h2>Role Report</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 
 <div class="body-content">
 
-	<table class="table">
-		<tr>
-			<th>
-				Role
-			</th>
-		</tr>
 
-		@foreach (var item in Model) {
-			<tr>
-				<td>
-					@Html.DisplayFor(modelItem => item.strRoleName)
-				</td>
-				<td>
-					@Html.ActionLink("Edit", "Edit", new { id = item.intRoleID }, new { @class = "link-icon-edit" })
-				</td>
-				<td>
-					@Html.ActionLink("Details", "Details", new { id = item.intRoleID }, new { @class = "link-icon-details" })
-				</td>
-				<td>
-					@Html.ActionLink("Delete", "Delete", new { id = item.intRoleID }, new { @class = "link-icon-delete" })
-				</td>
-			</tr>
+	<h2 style="background-color: white;color: black; text-align: center; font-style: oblique">Report Of User Roles</h2>
+
+
+	@Html.ActionLink("Create New", "Save", "TRoles", null, new { @style = "font-size:22px;", @class = "popup" })
+
+
+
+	<div id="update_panel">
+		@* This will be formatted and pulled from the JS file. *@
+	</div>
+
+	@* Add Jquery UI Css *@
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
+
+	<style>
+		table {
+			font-family: arial, sans-serif;
+			border-collapse: collapse;
+			width: 100%;
 		}
 
-	</table>
-	</div>
+		td, th {
+			border: 1px solid #dddddd;
+			text-align: left;
+			padding: 8px;
+		}
+
+		tr:nth-child(even) {
+			background-color: #dddddd;
+		}
+
+		.ui-widget-header {
+			border: none !important;
+			background: none !important;
+			color: #222222;
+			font-weight: bold;
+		}
+
+		.ui-state-default, .ui-state-hover {
+			border: none !important;
+			background: none !important;
+		}
+
+		.ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset {
+			float: none;
+		}
+
+		.ui-dialog {
+			webkit-box-shadow: 0 5px 15px rgba(0,0,0,.5);
+			box-shadow: 0 5px 15px rgba(0,0,0,.5);
+		}
+
+		.ui-dialog-buttonset {
+			position: inherit;
+		}
+
+		h2 {
+			margin-top: 0px;
+			font-size: 30px;
+		}
+
+		/*.success {
+			color: green;
+		}
+
+		.failed {
+			color: red;
+		}*/
+	</style>
+
+</div>
+
+@section Scripts{
+	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+	<script src="~/Scripts/Roles.js"></script>
+}
+
+
 

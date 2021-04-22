@@ -11,85 +11,95 @@
 <style>
 
 	.body-content {
-		background-color: white;
-		border: 30px solid #6495ed;
-		height: 800px;
-		width: 30%;
-		margin-left: auto;
-		margin-right: auto;
-		margin-top: auto;
+		position: absolute;
+		top: 44%;
+		left: 46%;
+		margin-top: -140px;
+		margin-left: -450px;
+		width: 1000px;
+		height: 500px;
+		background-color: transparent;
+		border: outset;
 		margin-bottom: auto;
+		border-width: thick;
 	}
 
-	.rowonebtn {
+	.inner-div {
+		position: absolute;
+		top: 5%;
+		left: 3%;
+	}
+
+	.settingsbtn {
 		background-color: DodgerBlue;
-		border: none;
+		border: solid;
+		border-color: #2e6da4;
 		color: white;
 		padding: 12px 16px;
 		font-size: 16px;
 		cursor: pointer;
 		display: inline-grid;
 		width: 200px;
-		height: 150px;
-		font-size: 20px;
+		height: 125px;
+		/*font-size: 20px;*/
 		color: black;
+		margin: 25px;
+		border-radius: 25px;
 	}
-
-	.rowtwobtn {
-		background-color: DodgerBlue;
-		border: none;
-		color: white;
-		padding: 12px 16px;
-		font-size: 16px;
-		cursor: pointer;
-		display: inline-grid;
-		width: 200px;
-		height: 150px;
-		font-size: 20px;
-		color: black;
-	}
+	
 </style>
 
-<body>
+
 <div class="body-content">
+	<div class="inner-div">
+		<div style="margin-left:87px; display: flex; flex-wrap: wrap;">
 
-	<div style="margin-left:87px;">
+			<button type="submit" class="settingsbtn" name="btnSvcTypes">
+				<i class="fas fa-notes-medical" , style="font-size:45px; margin: 15px"></i>
+				@Html.ActionLink("Service Types", "Index", "TServiceTypes", null, new { style = "color: #264e70;text-decoration: none;font-weight: 700;" })
+			</button>
 
-		<button type="submit" class="settingsbtn" name="btnSvcTypes">
-			<i class="fas fa-notes-medical" , style="font-size:45px"></i>
-			@Html.ActionLink("Add Service Type", "Create", "TServiceTypes")
-		</button>
+			<button type="submit" class="settingsbtn" name="btnPetTypes">
+				<i class="fas fa-paw" , style="font-size:45px; margin: 15px"></i>
+				@Html.ActionLink("Pet Types", "Index", "TPetTypes", null, new { style = "color: #264e70;text-decoration: none;font-weight: 700;" })
+			</button>
 
-		<button type="submit" class="settingsbtn" name="btnPetTypes">
-			<i class="fas fa-paw" , style="font-size:45px"></i>
-			@Html.ActionLink("Add Pet Type", "Create", "TPetTypes")
-		</button>
+			<button type="submit" class="settingsbtn" name="btnBreeds">
+				<i class="fas fa-dog" , style="font-size:45px; margin: 15px"></i>
+				@Html.ActionLink("Breeds", "Index", "TBreeds", null, new { style = "color: #264e70;text-decoration: none;font-weight: 700;" })
+			</button>
 
-		<button type="submit" class="settingsbtn" name="btnBreeds">
-			<i class="fas fa-dog" , style="font-size:45px"></i>
-			@Html.ActionLink("Add Breed", "Create", "TBreeds")
-		</button>
+		</div>
 
-	</div>
+		<br />
+		<br />
 
-	<br />
-	<br />
+		<div style="margin-left:87px;display: flex; flex-wrap: wrap;">
+			<button type="submit" class="settingsbtn" name="btnMedicationType">
+				<i class="fas fa-prescription-bottle-alt" , style="font-size:45px; margin: 15px"></i>
+				@Html.ActionLink("Medication Methods", "Index", "TMethods", null, new { style = "color: #264e70;text-decoration: none;font-weight: 700;" })
+			</button>
+			<button type="submit" class="settingsbtn" name="btnUsers">
+				<i class="fas fa-id-badge" , style="font-size:45px; margin: 15px"></i>
+				@Html.ActionLink("Users", "Index", "TUsers", null, new { style = "color: #264e70;text-decoration: none;font-weight: 700;" })
+			</button>
+			<button type="submit" class="settingsbtn" name="btnRole">
+				<i class="fas fa-user-tag" , style="font-size:45px; margin: 15px"></i>
+				@Html.ActionLink("User Roles", "Index", "TRoles", null, new { style = "color: #264e70;text-decoration: none;font-weight: 700;" })
+			</button>
 
-	<div style="margin-left:87px;">
-		<button type="submit" class="rowtwobtn" name="btnMedicationType">
-			<i class="fas fa-prescription-bottle-alt" , style="font-size:45px"></i>
-			@Html.ActionLink("Add Medication Type", "Create", "TMethods")
-		</button>
-		<button type="submit" class="rowtwobtn" name="btnJobTitles">
-			<i class="fas fa-id-badge" , style="font-size:45px"></i>
-			@Html.ActionLink("Add User", "Create", "TUsers")
-		</button>
-		<button type="submit" class="rowtwobtn" name="btnRole">
-			<i class="fas fa-user-tag" , style="font-size:45px"></i>
-			@Html.ActionLink("Add Employee Role", "Create", "TRoles")
-		</button>
+		</div>
 
+		<br />
+		<br />
+
+		<div style="margin-left:87px;display: flex; flex-wrap: wrap;">
+			<button type="submit" class="settingsbtn" name="btnVisitReason">
+				<i class="glyphicon glyphicon-inbox" , style="font-size:45px; margin: 15px"></i>
+				@Html.ActionLink("Visit Reasons", "Index", "TVisitReasons", null, new { style = "color: #264e70;text-decoration: none;font-weight: 700;" })
+			</button>
+		</div>
 	</div>
 
 </div>
-</body>
+

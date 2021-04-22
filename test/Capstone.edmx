@@ -416,6 +416,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="TEmployees_TJobTitles_FK1">
+          <End Role="TJobTitles" Type="Self.TJobTitles" Multiplicity="1" />
+          <End Role="TEmployees" Type="Self.TEmployees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TJobTitles">
+              <PropertyRef Name="intJobTitleID" />
+            </Principal>
+            <Dependent Role="TEmployees">
+              <PropertyRef Name="intJobTitleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="TEyeStatusInfos_THealthExams_FK1">
           <End Role="THealthExams" Type="Self.THealthExams" Multiplicity="1" />
           <End Role="TEyeStatusInfos" Type="Self.TEyeStatusInfos" Multiplicity="*" />
@@ -1264,6 +1276,10 @@
           <AssociationSet Name="TEarStatusInfos_THealthExams_FK1" Association="Self.TEarStatusInfos_THealthExams_FK1">
             <End Role="THealthExams" EntitySet="THealthExams" />
             <End Role="TEarStatusInfos" EntitySet="TEarStatusInfos" />
+          </AssociationSet>
+          <AssociationSet Name="TEmployees_TJobTitles_FK1" Association="Self.TEmployees_TJobTitles_FK1">
+            <End Role="TJobTitles" EntitySet="TJobTitles" />
+            <End Role="TEmployees" EntitySet="TEmployees" />
           </AssociationSet>
           <AssociationSet Name="TEyeStatusInfos_THealthExams_FK1" Association="Self.TEyeStatusInfos_THealthExams_FK1">
             <End Role="THealthExams" EntitySet="THealthExams" />
@@ -2315,6 +2331,10 @@
             <End Role="THealthExam" EntitySet="THealthExams" />
             <End Role="TEarStatusInfo" EntitySet="TEarStatusInfos" />
           </AssociationSet>
+          <AssociationSet Name="TEmployees_TJobTitles_FK1" Association="Model.TEmployees_TJobTitles_FK1">
+            <End Role="TJobTitle" EntitySet="TJobTitles" />
+            <End Role="TEmployee" EntitySet="TEmployees" />
+          </AssociationSet>
           <AssociationSet Name="TVisitEmployees_TEmployees_FK1" Association="Model.TVisitEmployees_TEmployees_FK1">
             <End Role="TEmployee" EntitySet="TEmployees" />
             <End Role="TVisitEmployee" EntitySet="TVisitEmployees" />
@@ -2824,6 +2844,540 @@
           <Property Type="Int32" Name="intServiceTypeID" Nullable="false" />
           <Property Type="Decimal" Name="dblPrice" Nullable="false" Precision="19" />
         </ComplexType>
+
+        <ComplexType Name="uspSelectLatestPetImages_Result">
+          <Property Type="Int32" Name="intPetImageID" Nullable="false" />
+          <Property Type="Int32" Name="intPetID" Nullable="false" />
+          <Property Type="String" Name="imgPrimaryImage" Nullable="false" MaxLength="1" />
+          <Property Type="Binary" Name="imgImage" Nullable="false" />
+          <Property Type="String" Name="strFileName" Nullable="false" MaxLength="1000" />
+          <Property Type="Int32" Name="intImageSize" Nullable="false" />
+          <Property Type="DateTime" Name="dtmDateAdded" Nullable="false" />
+          <Property Type="Int32" Name="intPetID1" Nullable="false" />
+          <Property Type="String" Name="strPetNumber" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="strMicrochipID" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="strPetName" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="intPetTypeID" Nullable="false" />
+          <Property Type="Int32" Name="intGenderID" Nullable="false" />
+          <Property Type="Int32" Name="intBreedID" Nullable="false" />
+          <Property Type="DateTime" Name="dtmDateofBirth" Nullable="false" />
+          <Property Type="Double" Name="dblWeight" Nullable="false" />
+          <Property Type="Boolean" Name="isBlind" Nullable="false" />
+          <Property Type="Boolean" Name="isDeaf" Nullable="false" />
+          <Property Type="Boolean" Name="isAggressive" Nullable="false" />
+          <Property Type="Boolean" Name="isDeceased" Nullable="false" />
+          <Property Type="Boolean" Name="isAllergic" Nullable="false" />
+          <Property Type="String" Name="strColor" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="strNotes" Nullable="false" MaxLength="1000" />
+          <Property Type="Int32" Name="intOwnerID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="uspSelectPetImages_Result">
+          <Property Type="Int32" Name="intPetImageID" Nullable="false" />
+          <Property Type="Int32" Name="intPetID" Nullable="false" />
+          <Property Type="String" Name="imgPrimaryImage" Nullable="false" MaxLength="1" />
+          <Property Type="Binary" Name="imgImage" Nullable="false" />
+          <Property Type="String" Name="strFileName" Nullable="false" MaxLength="1000" />
+          <Property Type="Int32" Name="intImageSize" Nullable="false" />
+          <Property Type="DateTime" Name="dtmDateAdded" Nullable="false" />
+          <Property Type="Int32" Name="intPetID1" Nullable="false" />
+          <Property Type="String" Name="strPetNumber" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="strMicrochipID" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="strPetName" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="intPetTypeID" Nullable="false" />
+          <Property Type="Int32" Name="intGenderID" Nullable="false" />
+          <Property Type="Int32" Name="intBreedID" Nullable="false" />
+          <Property Type="DateTime" Name="dtmDateofBirth" Nullable="false" />
+          <Property Type="Double" Name="dblWeight" Nullable="false" />
+          <Property Type="Boolean" Name="isBlind" Nullable="false" />
+          <Property Type="Boolean" Name="isDeaf" Nullable="false" />
+          <Property Type="Boolean" Name="isAggressive" Nullable="false" />
+          <Property Type="Boolean" Name="isDeceased" Nullable="false" />
+          <Property Type="Boolean" Name="isAllergic" Nullable="false" />
+          <Property Type="String" Name="strColor" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="strNotes" Nullable="false" MaxLength="1000" />
+          <Property Type="Int32" Name="intOwnerID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="uspViewEmployees2_Result">
+
+        <ComplexType Name="uspViewEmployees1_Result">
+
+          <Property Type="Int32" Name="intEmployeeID" Nullable="false" />
+          <Property Type="String" Name="strFirstName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="strLastName" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="intJobTitleID" Nullable="false" />
+          <Property Type="Int32" Name="intUserID" Nullable="false" />
+        </ComplexType>
+
+        <ComplexType Name="uspViewMedications2_Result">
+
+        <ComplexType Name="uspViewMedications1_Result">
+
+          <Property Type="Int32" Name="intMedicationID" Nullable="false" />
+          <Property Type="String" Name="strMedicationName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="strMedicationDesc" Nullable="false" MaxLength="50" />
+          <Property Type="Decimal" Name="dblCost" Nullable="false" Precision="19" />
+          <Property Type="Decimal" Name="dblPrice" Nullable="false" Precision="19" />
+          <Property Type="String" Name="strNotes" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="intQuantity" Nullable="false" />
+          <Property Type="Int32" Name="intMethodID" Nullable="false" />
+        </ComplexType>
+
+        <ComplexType Name="uspViewOwnerPets1_Result">
+
+        <ComplexType Name="uspViewOwnerPets_Result">
+
+          <Property Type="Int32" Name="intPetID" Nullable="false" />
+          <Property Type="String" Name="strPetNumber" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="strMicrochipID" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="strPetName" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="intPetTypeID" Nullable="false" />
+          <Property Type="Int32" Name="intGenderID" Nullable="false" />
+          <Property Type="Int32" Name="intBreedID" Nullable="false" />
+          <Property Type="DateTime" Name="dtmDateofBirth" Nullable="false" />
+          <Property Type="Double" Name="dblWeight" Nullable="false" />
+          <Property Type="Boolean" Name="isBlind" Nullable="false" />
+          <Property Type="Boolean" Name="isDeaf" Nullable="false" />
+          <Property Type="Boolean" Name="isAggressive" Nullable="false" />
+          <Property Type="Boolean" Name="isDeceased" Nullable="false" />
+          <Property Type="Boolean" Name="isAllergic" Nullable="false" />
+          <Property Type="String" Name="strColor" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="strNotes" Nullable="false" MaxLength="1000" />
+          <Property Type="Int32" Name="intOwnerID" Nullable="false" />
+          <Property Type="Int32" Name="intOwnerID1" Nullable="false" />
+          <Property Type="Int32" Name="intOwnerID2" Nullable="false" />
+          <Property Type="String" Name="strFirstName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="strLastName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="strEmail" Nullable="false" MaxLength="50" />
+        </ComplexType>
+
+        <ComplexType Name="uspViewOwners2_Result">
+
+        <ComplexType Name="uspViewOwners1_Result">
+
+          <Property Type="Int32" Name="intOwnerID" Nullable="false" />
+          <Property Type="String" Name="strFirstName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="strLastName" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="intGenderID" Nullable="false" />
+          <Property Type="String" Name="strAddress" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="strCity" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="intStateID" Nullable="false" />
+          <Property Type="String" Name="strZip" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="strPhoneNumber" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="strEmail" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="strOwner2Name" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="strOwner2PhoneNumber" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="strOwner2Email" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="strNotes" Nullable="false" MaxLength="200" />
+          <Property Type="Int32" Name="intUserID" Nullable="false" />
+        </ComplexType>
+
+        <ComplexType Name="uspViewPetGeneralInformation2_Result">
+
+        <ComplexType Name="uspViewPetGeneralInformation1_Result">
+
+          <Property Type="Int32" Name="intPetID" Nullable="false" />
+          <Property Type="String" Name="strMicrochipID" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="strPetName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="strPetType" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="strGender" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="strBreedName" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="intAge" Nullable="true" />
+          <Property Type="Double" Name="dblWeight" Nullable="false" />
+          <Property Type="String" Name="strColor" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="strOwnerName" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="strPhoneNumber" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="strEmail" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="strOwnerAddress" Nullable="false" MaxLength="203" />
+        </ComplexType>
+
+        <ComplexType Name="uspViewPetMedications2_Result">
+
+        <ComplexType Name="uspViewPetMedications1_Result">
+
+          <Property Type="Int32" Name="intPetID" Nullable="false" />
+          <Property Type="DateTime" Name="dtmDatePrescribed" Nullable="false" />
+          <Property Type="Int32" Name="intMedicationID" Nullable="false" />
+          <Property Type="Int32" Name="intQuantity" Nullable="false" />
+          <Property Type="String" Name="strNotes" Nullable="false" MaxLength="50" />
+        </ComplexType>
+
+        <ComplexType Name="uspViewPets2_Result">
+
+        <ComplexType Name="uspViewPets1_Result">
+
+          <Property Type="Int32" Name="intPetID" Nullable="false" />
+          <Property Type="String" Name="strPetNumber" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="strMicrochipID" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="strPetName" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="intPetTypeID" Nullable="false" />
+          <Property Type="Int32" Name="intGenderID" Nullable="false" />
+          <Property Type="Int32" Name="intBreedID" Nullable="false" />
+          <Property Type="DateTime" Name="dtmDateofBirth" Nullable="false" />
+          <Property Type="Double" Name="dblWeight" Nullable="false" />
+          <Property Type="Boolean" Name="isBlind" Nullable="false" />
+          <Property Type="Boolean" Name="isDeaf" Nullable="false" />
+          <Property Type="Boolean" Name="isAggressive" Nullable="false" />
+          <Property Type="Boolean" Name="isDeceased" Nullable="false" />
+          <Property Type="Boolean" Name="isAllergic" Nullable="false" />
+          <Property Type="String" Name="strColor" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="strNotes" Nullable="false" MaxLength="1000" />
+          <Property Type="Int32" Name="intOwnerID" Nullable="false" />
+        </ComplexType>
+
+        <ComplexType Name="uspViewPetVaccinations2_Result">
+
+        <ComplexType Name="uspViewPetVaccinations1_Result">
+
+          <Property Type="Int32" Name="intVaccinationID" Nullable="false" />
+          <Property Type="Int32" Name="intVisitServiceID" Nullable="false" />
+          <Property Type="DateTime" Name="dtmDateOfVaccination" Nullable="false" />
+          <Property Type="DateTime" Name="dtmDateOfExpiration" Nullable="false" />
+          <Property Type="String" Name="strVaccineDesc" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="strRabiesNumber" Nullable="false" MaxLength="50" />
+        </ComplexType>
+
+        <ComplexType Name="uspViewPetVisits2_Result">
+          <Property Type="Int32" Name="intPetID" Nullable="false" />
+          <Property Type="DateTime" Name="dtmDateOfVist" Nullable="false" />
+          <Property Type="String" Name="strVisitReason" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="strDoctor" Nullable="false" MaxLength="105" />
+        </ComplexType>
+        <ComplexType Name="uspViewPetVisitsByPet_Result">
+
+        <ComplexType Name="uspViewPetVisits1_Result">
+
+          <Property Type="Int32" Name="intPetID" Nullable="false" />
+          <Property Type="DateTime" Name="dtmDateOfVist" Nullable="false" />
+          <Property Type="String" Name="strVisitReason" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="strDoctor" Nullable="false" MaxLength="105" />
+        </ComplexType>
+
+        <ComplexType Name="uspViewServices2_Result">
+
+        <ComplexType Name="uspViewServices1_Result">
+
+          <Property Type="Int32" Name="intServiceID" Nullable="false" />
+          <Property Type="String" Name="strServiceDesc" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="intServiceTypeID" Nullable="false" />
+          <Property Type="Decimal" Name="dblPrice" Nullable="false" Precision="19" />
+        </ComplexType>
+
+        <ComplexType Name="uspSelectPetImages1_Result">
+          <Property Type="Int32" Name="intPetImageID" Nullable="false" />
+          <Property Type="String" Name="strFileName" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="strContentType" Nullable="true" MaxLength="100" />
+          <Property Type="Binary" Name="imgContent" Nullable="false" />
+          <Property Type="String" Name="strFileType" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="intPetID" Nullable="false" />
+          <Property Type="Int32" Name="intPetID1" Nullable="false" />
+          <Property Type="String" Name="strPetNumber" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="strMicrochipID" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="strPetName" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="intPetTypeID" Nullable="false" />
+          <Property Type="Int32" Name="intGenderID" Nullable="false" />
+          <Property Type="Int32" Name="intBreedID" Nullable="false" />
+          <Property Type="DateTime" Name="dtmDateofBirth" Nullable="false" />
+          <Property Type="Double" Name="dblWeight" Nullable="false" />
+          <Property Type="Boolean" Name="isBlind" Nullable="false" />
+          <Property Type="Boolean" Name="isDeaf" Nullable="false" />
+          <Property Type="Boolean" Name="isAggressive" Nullable="false" />
+          <Property Type="Boolean" Name="isDeceased" Nullable="false" />
+          <Property Type="Boolean" Name="isAllergic" Nullable="false" />
+          <Property Type="String" Name="strColor" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="strNotes" Nullable="false" MaxLength="1000" />
+          <Property Type="Int32" Name="intOwnerID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="uspSelectLatestPetImages1_Result">
+          <Property Type="Int32" Name="intPetImageID" Nullable="false" />
+          <Property Type="String" Name="strFileName" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="strContentType" Nullable="true" MaxLength="100" />
+          <Property Type="Binary" Name="imgContent" Nullable="false" />
+          <Property Type="String" Name="strFileType" Nullable="false" MaxLength="255" />
+          <Property Type="Int32" Name="intPetID" Nullable="false" />
+
+        <ComplexType Name="uspSelectLatestPetImages_Result">
+          <Property Type="Int32" Name="intPetImageID" Nullable="false" />
+          <Property Type="Int32" Name="intPetID" Nullable="false" />
+          <Property Type="String" Name="imgPrimaryImage" Nullable="false" MaxLength="1" />
+          <Property Type="Binary" Name="imgImage" Nullable="false" />
+          <Property Type="String" Name="strFileName" Nullable="false" MaxLength="1000" />
+          <Property Type="Int32" Name="intImageSize" Nullable="false" />
+          <Property Type="DateTime" Name="dtmDateAdded" Nullable="false" />
+
+          <Property Type="Int32" Name="intPetID1" Nullable="false" />
+          <Property Type="String" Name="strPetNumber" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="strMicrochipID" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="strPetName" Nullable="false" MaxLength="50" />
+
+          <Property Type="Int32" Name="intPetTypeID" Nullable="false" />
+          <Property Type="Int32" Name="intGenderID" Nullable="false" />
+          <Property Type="Int32" Name="intBreedID" Nullable="false" />
+          <Property Type="DateTime" Name="dtmDateofBirth" Nullable="false" />
+          <Property Type="Double" Name="dblWeight" Nullable="false" />
+          <Property Type="Boolean" Name="isBlind" Nullable="false" />
+          <Property Type="Boolean" Name="isDeaf" Nullable="false" />
+          <Property Type="Boolean" Name="isAggressive" Nullable="false" />
+          <Property Type="Boolean" Name="isDeceased" Nullable="false" />
+          <Property Type="Boolean" Name="isAllergic" Nullable="false" />
+          <Property Type="String" Name="strColor" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="strNotes" Nullable="false" MaxLength="1000" />
+          <Property Type="Int32" Name="intOwnerID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="uspViewEmployees3_Result">
+          <Property Type="Int32" Name="intEmployeeID" Nullable="false" />
+          <Property Type="String" Name="strFirstName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="strLastName" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="intJobTitleID" Nullable="false" />
+          <Property Type="Int32" Name="intUserID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="uspViewMedications3_Result">
+          <Property Type="Int32" Name="intMedicationID" Nullable="false" />
+          <Property Type="String" Name="strMedicationName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="strMedicationDesc" Nullable="false" MaxLength="50" />
+          <Property Type="Decimal" Name="dblCost" Nullable="false" Precision="19" />
+          <Property Type="Decimal" Name="dblPrice" Nullable="false" Precision="19" />
+          <Property Type="String" Name="strNotes" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="intQuantity" Nullable="false" />
+          <Property Type="Int32" Name="intMethodID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="uspViewOwnerPets2_Result">
+          <Property Type="Int32" Name="intPetID" Nullable="false" />
+          <Property Type="String" Name="strPetNumber" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="strMicrochipID" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="strPetName" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="intPetTypeID" Nullable="false" />
+          <Property Type="Int32" Name="intGenderID" Nullable="false" />
+          <Property Type="Int32" Name="intBreedID" Nullable="false" />
+          <Property Type="DateTime" Name="dtmDateofBirth" Nullable="false" />
+          <Property Type="Double" Name="dblWeight" Nullable="false" />
+          <Property Type="Boolean" Name="isBlind" Nullable="false" />
+          <Property Type="Boolean" Name="isDeaf" Nullable="false" />
+          <Property Type="Boolean" Name="isAggressive" Nullable="false" />
+          <Property Type="Boolean" Name="isDeceased" Nullable="false" />
+          <Property Type="Boolean" Name="isAllergic" Nullable="false" />
+          <Property Type="String" Name="strColor" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="strNotes" Nullable="false" MaxLength="1000" />
+          <Property Type="Int32" Name="intOwnerID" Nullable="false" />
+          <Property Type="Int32" Name="intOwnerID1" Nullable="false" />
+          <Property Type="Int32" Name="intOwnerID2" Nullable="false" />
+          <Property Type="String" Name="strFirstName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="strLastName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="strEmail" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="uspViewOwners3_Result">
+          <Property Type="Int32" Name="intOwnerID" Nullable="false" />
+          <Property Type="String" Name="strFirstName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="strLastName" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="intGenderID" Nullable="false" />
+          <Property Type="String" Name="strAddress" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="strCity" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="intStateID" Nullable="false" />
+          <Property Type="String" Name="strZip" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="strPhoneNumber" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="strEmail" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="strOwner2Name" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="strOwner2PhoneNumber" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="strOwner2Email" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="strNotes" Nullable="false" MaxLength="200" />
+          <Property Type="Int32" Name="intUserID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="uspViewPetGeneralInformation3_Result">
+          <Property Type="Int32" Name="intPetID" Nullable="false" />
+          <Property Type="String" Name="strMicrochipID" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="strPetName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="strPetType" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="strGender" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="strBreedName" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="intAge" Nullable="true" />
+          <Property Type="Double" Name="dblWeight" Nullable="false" />
+          <Property Type="String" Name="strColor" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="strOwnerName" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="strPhoneNumber" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="strEmail" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="strOwnerAddress" Nullable="false" MaxLength="203" />
+        </ComplexType>
+        <ComplexType Name="uspViewPetMedications3_Result">
+          <Property Type="Int32" Name="intPetID" Nullable="false" />
+          <Property Type="DateTime" Name="dtmDatePrescribed" Nullable="false" />
+          <Property Type="Int32" Name="intMedicationID" Nullable="false" />
+          <Property Type="Int32" Name="intQuantity" Nullable="false" />
+          <Property Type="String" Name="strNotes" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="uspViewPets3_Result">
+          <Property Type="Int32" Name="intPetID" Nullable="false" />
+          <Property Type="String" Name="strPetNumber" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="strMicrochipID" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="strPetName" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="intPetTypeID" Nullable="false" />
+          <Property Type="Int32" Name="intGenderID" Nullable="false" />
+          <Property Type="Int32" Name="intBreedID" Nullable="false" />
+          <Property Type="DateTime" Name="dtmDateofBirth" Nullable="false" />
+          <Property Type="Double" Name="dblWeight" Nullable="false" />
+          <Property Type="Boolean" Name="isBlind" Nullable="false" />
+          <Property Type="Boolean" Name="isDeaf" Nullable="false" />
+          <Property Type="Boolean" Name="isAggressive" Nullable="false" />
+          <Property Type="Boolean" Name="isDeceased" Nullable="false" />
+          <Property Type="Boolean" Name="isAllergic" Nullable="false" />
+          <Property Type="String" Name="strColor" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="strNotes" Nullable="false" MaxLength="1000" />
+          <Property Type="Int32" Name="intOwnerID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="uspViewPetVaccinations3_Result">
+          <Property Type="Int32" Name="intVaccinationID" Nullable="false" />
+          <Property Type="Int32" Name="intVisitServiceID" Nullable="false" />
+          <Property Type="DateTime" Name="dtmDateOfVaccination" Nullable="false" />
+          <Property Type="DateTime" Name="dtmDateOfExpiration" Nullable="false" />
+          <Property Type="String" Name="strVaccineDesc" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="strRabiesNumber" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="uspViewPetVisits3_Result">
+          <Property Type="Int32" Name="intPetID" Nullable="false" />
+          <Property Type="DateTime" Name="dtmDateOfVist" Nullable="false" />
+          <Property Type="String" Name="strVisitReason" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="strDoctor" Nullable="false" MaxLength="105" />
+        </ComplexType>
+        <ComplexType Name="uspViewServices3_Result">
+          <Property Type="Int32" Name="intServiceID" Nullable="false" />
+          <Property Type="String" Name="strServiceDesc" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="intServiceTypeID" Nullable="false" />
+          <Property Type="Decimal" Name="dblPrice" Nullable="false" Precision="19" />
+        </ComplexType>
+        <ComplexType Name="uspViewEmployees4_Result">
+          <Property Type="Int32" Name="intEmployeeID" Nullable="false" />
+          <Property Type="String" Name="strFirstName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="strLastName" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="intJobTitleID" Nullable="false" />
+          <Property Type="Int32" Name="intUserID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="uspViewMedications4_Result">
+          <Property Type="Int32" Name="intMedicationID" Nullable="false" />
+          <Property Type="String" Name="strMedicationName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="strMedicationDesc" Nullable="false" MaxLength="50" />
+          <Property Type="Decimal" Name="dblCost" Nullable="false" Precision="19" />
+          <Property Type="Decimal" Name="dblPrice" Nullable="false" Precision="19" />
+          <Property Type="String" Name="strNotes" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="intQuantity" Nullable="false" />
+          <Property Type="Int32" Name="intMethodID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="uspViewEmployees1_Result">
+          <Property Type="Int32" Name="intEmployeeID" Nullable="false" />
+          <Property Type="String" Name="strFirstName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="strLastName" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="intJobTitleID" Nullable="false" />
+          <Property Type="Int32" Name="intUserID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="uspViewMedications1_Result">
+          <Property Type="Int32" Name="intMedicationID" Nullable="false" />
+          <Property Type="String" Name="strMedicationName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="strMedicationDesc" Nullable="false" MaxLength="50" />
+          <Property Type="Decimal" Name="dblCost" Nullable="false" Precision="19" />
+          <Property Type="Decimal" Name="dblPrice" Nullable="false" Precision="19" />
+          <Property Type="String" Name="strNotes" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="intQuantity" Nullable="false" />
+          <Property Type="Int32" Name="intMethodID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="uspViewOwnerPets_Result">
+          <Property Type="Int32" Name="intPetID" Nullable="false" />
+          <Property Type="String" Name="strPetNumber" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="strMicrochipID" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="strPetName" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="intPetTypeID" Nullable="false" />
+          <Property Type="Int32" Name="intGenderID" Nullable="false" />
+          <Property Type="Int32" Name="intBreedID" Nullable="false" />
+          <Property Type="DateTime" Name="dtmDateofBirth" Nullable="false" />
+          <Property Type="Double" Name="dblWeight" Nullable="false" />
+          <Property Type="Boolean" Name="isBlind" Nullable="false" />
+          <Property Type="Boolean" Name="isDeaf" Nullable="false" />
+          <Property Type="Boolean" Name="isAggressive" Nullable="false" />
+          <Property Type="Boolean" Name="isDeceased" Nullable="false" />
+          <Property Type="Boolean" Name="isAllergic" Nullable="false" />
+          <Property Type="String" Name="strColor" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="strNotes" Nullable="false" MaxLength="1000" />
+          <Property Type="Int32" Name="intOwnerID" Nullable="false" />
+          <Property Type="Int32" Name="intOwnerID1" Nullable="false" />
+          <Property Type="Int32" Name="intOwnerID2" Nullable="false" />
+          <Property Type="String" Name="strFirstName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="strLastName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="strEmail" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="uspViewOwners1_Result">
+          <Property Type="Int32" Name="intOwnerID" Nullable="false" />
+          <Property Type="String" Name="strFirstName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="strLastName" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="intGenderID" Nullable="false" />
+          <Property Type="String" Name="strAddress" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="strCity" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="intStateID" Nullable="false" />
+          <Property Type="String" Name="strZip" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="strPhoneNumber" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="strEmail" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="strOwner2Name" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="strOwner2PhoneNumber" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="strOwner2Email" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="strNotes" Nullable="false" MaxLength="200" />
+          <Property Type="Int32" Name="intUserID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="uspViewPetGeneralInformation1_Result">
+          <Property Type="Int32" Name="intPetID" Nullable="false" />
+          <Property Type="String" Name="strMicrochipID" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="strPetName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="strPetType" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="strGender" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="strBreedName" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="intAge" Nullable="true" />
+          <Property Type="Double" Name="dblWeight" Nullable="false" />
+          <Property Type="String" Name="strColor" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="strOwnerName" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="strPhoneNumber" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="strEmail" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="strOwnerAddress" Nullable="false" MaxLength="203" />
+        </ComplexType>
+        <ComplexType Name="uspViewPetMedications1_Result">
+          <Property Type="Int32" Name="intPetID" Nullable="false" />
+          <Property Type="DateTime" Name="dtmDatePrescribed" Nullable="false" />
+          <Property Type="Int32" Name="intMedicationID" Nullable="false" />
+          <Property Type="Int32" Name="intQuantity" Nullable="false" />
+          <Property Type="String" Name="strNotes" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="uspViewPets1_Result">
+          <Property Type="Int32" Name="intPetID" Nullable="false" />
+          <Property Type="String" Name="strPetNumber" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="strMicrochipID" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="strPetName" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="intPetTypeID" Nullable="false" />
+          <Property Type="Int32" Name="intGenderID" Nullable="false" />
+          <Property Type="Int32" Name="intBreedID" Nullable="false" />
+          <Property Type="DateTime" Name="dtmDateofBirth" Nullable="false" />
+          <Property Type="Double" Name="dblWeight" Nullable="false" />
+          <Property Type="Boolean" Name="isBlind" Nullable="false" />
+          <Property Type="Boolean" Name="isDeaf" Nullable="false" />
+          <Property Type="Boolean" Name="isAggressive" Nullable="false" />
+          <Property Type="Boolean" Name="isDeceased" Nullable="false" />
+          <Property Type="Boolean" Name="isAllergic" Nullable="false" />
+          <Property Type="String" Name="strColor" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="strNotes" Nullable="false" MaxLength="1000" />
+          <Property Type="Int32" Name="intOwnerID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="uspViewPetVaccinations1_Result">
+          <Property Type="Int32" Name="intVaccinationID" Nullable="false" />
+          <Property Type="Int32" Name="intVisitServiceID" Nullable="false" />
+          <Property Type="DateTime" Name="dtmDateOfVaccination" Nullable="false" />
+          <Property Type="DateTime" Name="dtmDateOfExpiration" Nullable="false" />
+          <Property Type="String" Name="strVaccineDesc" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="strRabiesNumber" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="uspViewPetVisits1_Result">
+          <Property Type="Int32" Name="intPetID" Nullable="false" />
+          <Property Type="DateTime" Name="dtmDateOfVist" Nullable="false" />
+          <Property Type="String" Name="strVisitReason" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="strDoctor" Nullable="false" MaxLength="105" />
+        </ComplexType>
+        <ComplexType Name="uspViewServices1_Result">
+          <Property Type="Int32" Name="intServiceID" Nullable="false" />
+          <Property Type="String" Name="strServiceDesc" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="intServiceTypeID" Nullable="false" />
+          <Property Type="Decimal" Name="dblPrice" Nullable="false" Precision="19" />
+        </ComplexType>
         <ComplexType Name="uspSelectLatestPetImages_Result">
           <Property Type="Int32" Name="intPetImageID" Nullable="false" />
           <Property Type="Int32" Name="intPetID" Nullable="false" />
@@ -2947,6 +3501,7 @@
           <Property Name="strLastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="intJobTitleID" Type="Int32" Nullable="false" />
           <Property Name="intUserID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TJobTitle" Relationship="Model.TEmployees_TJobTitles_FK1" FromRole="TEmployee" ToRole="TJobTitle" />
           <NavigationProperty Name="TVisitEmployees" Relationship="Model.TVisitEmployees_TEmployees_FK1" FromRole="TEmployee" ToRole="TVisitEmployee" />
           <NavigationProperty Name="TJobTitle" Relationship="Model.Employees_TJobtitles_FK1" FromRole="TEmployee" ToRole="TJobTitle" />
         </EntityType>
@@ -3392,6 +3947,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="TEmployees_TJobTitles_FK1">
+          <End Type="Model.TJobTitle" Role="TJobTitle" Multiplicity="1" />
+          <End Type="Model.TEmployee" Role="TEmployee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TJobTitle">
+              <PropertyRef Name="intJobTitleID" />
+            </Principal>
+            <Dependent Role="TEmployee">
+              <PropertyRef Name="intJobTitleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="TVisitEmployees_TEmployees_FK1">
           <End Type="Model.TEmployee" Role="TEmployee" Multiplicity="1" />
           <End Type="Model.TVisitEmployee" Role="TVisitEmployee" Multiplicity="*" />
@@ -3621,7 +4188,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="TPetImages_TPets_FK1">
-          <End Type="Model.TPet" Role="TPet" Multiplicity="1" />
+          <End Type="Model.TPet" Role="TPet" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="Model.TPetImage" Role="TPetImage" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TPet">

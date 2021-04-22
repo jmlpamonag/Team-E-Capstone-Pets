@@ -1,0 +1,50 @@
+﻿@model test.TUser
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete a User</h2>
+
+
+<div class="body-content">
+	<h4>Users</h4>
+	<hr />
+	<h3>Are you sure you want to delete this?</h3>
+	<dl class="dl-horizontal">
+		<dt>
+			UserName
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.strUserName)
+		</dd>
+
+		<dt>
+			Password
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.strPassword)
+		</dd>
+
+		<dt>
+			Role
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.TRole.strRoleName)
+		</dd>
+
+	</dl>
+
+	@using (Html.BeginForm()) {
+		@Html.AntiForgeryToken()
+
+		<div class="form-actions no-color">
+			<input type="submit" value="Delete" class="btn btn-default" /> |
+			@Html.ActionLink("Back to List", "Index")
+		</div>
+	}
+</div>
+</div>

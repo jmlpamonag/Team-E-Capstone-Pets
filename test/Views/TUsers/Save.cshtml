@@ -1,0 +1,31 @@
+﻿@model test.TUser
+
+
+<h2> New User </h2>
+
+
+@using (Html.BeginForm("Save", "TUsers", FormMethod.Post, new { role = "form", id = "saveForm" })) {
+
+
+	@Html.ValidationSummary(true)
+	@Html.AntiForgeryToken()
+
+	<div class="form-group">
+		@Html.HiddenFor(model => model.intUserID)
+		@Html.LabelFor(model => model.strUserName, "User Name:")
+		@Html.TextBoxFor(model => model.strUserName, new { @class = "form-control" })
+	</div>
+
+	<div class="form-group">
+		@Html.HiddenFor(model => model.intUserID)
+		@Html.LabelFor(model => model.strPassword, "Password:")
+		@Html.TextBoxFor(model => model.strPassword, new { @class = "form-control" })
+	</div>
+
+	<button type="submit" class="btn-primary">Save</button>
+
+	@Html.ActionLink("Back To List", "Index", null, new { @style = "margin-left:50px; font-weight:bold;" })
+	<div id="msg"></div>
+}
+
+

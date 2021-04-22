@@ -23,7 +23,7 @@
 				<th style="white-space:nowrap">
 					@Html.DisplayName("Last Name")
 				</th>
-				@*<th style="white-space:nowrap">
+				<th style="white-space:nowrap">
 					@Html.DisplayName("Gender")
 				</th>
 				<th style="white-space:nowrap">
@@ -37,7 +37,7 @@
 				</th>
 				<th style="white-space:nowrap">
 					@Html.DisplayName("Zip")
-				</th>*@
+				</th>
 				<th style="white-space:nowrap">
 					@Html.DisplayName("Phone #")
 				</th>
@@ -104,11 +104,17 @@
 						@Html.DisplayFor(modelItem => item.TUser.strUserName)
 					</td>*@
 
-					<td style="white-space:nowrap">
-						<a style="color:#5cb85c; padding-left: 15px" href='@Url.Action("Details", "TOwners", new { id = item.intOwnerID })' ;return false;>  <i class="far fa-eye"></i></a>
-						<a style="color:#f0ad4e; padding-left: 15px" href='@Url.Action("Edit", "TOwners", new { id = item.intOwnerID })' ;return false;>  <i class="fas fa-pencil-alt"></i></a>
-						<a style="color:red; padding-left: 15px" href='@Url.Action("Delete", "TOwners", new { id = item.intOwnerID })' ;return false;>  <i class="fas fa-trash-alt"></i></a>
-					</td>
+				<td style="white-space:nowrap">
+					<a style="color:#5cb85c; padding-left: 15px" href='@Url.Action("Details", "TOwners", new { id = item.intOwnerID })' ;return false;>  <i class="far fa-eye"></i></a>
+					<a style="color:#f0ad4e; padding-left: 15px" href='@Url.Action("Edit", "TOwners", new { id = item.intOwnerID })' ;return false;>  <i class="fas fa-pencil-alt"></i></a>
+
+					@if (item.TPets.Count > 0) {
+						<a style="color:dimgrey; padding-left: 15px"  title="Cannot Delete. Pets assigned to Owner." return false;>  <i class="fas fa-trash-alt"></i></a>
+					}
+				else { 
+					<a style="color:red; padding-left: 15px" title="Delete" href='@Url.Action("Delete", "TOwners", new { id = item.intOwnerID })' ;return false;>  <i class="fas fa-trash-alt"></i></a>
+					}
+				</td>
 				</tr>
 			}
 
